@@ -243,17 +243,17 @@
 
             <!-- 2. PROFILE CARD (Takes 2/8 columns = 25%) -->
             <div class="bento-card card-gray md:col-span-2 md:row-span-2 group p-6" onclick="openModal('profile')">
-                <div class="w-full aspect-[4/5] bg-panel-gray mb-6 rounded-2xl border border-border-gray flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
+                <div class="w-full aspect-[3/4] bg-panel-gray mb-6 rounded-2xl border border-border-gray flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
                      <img src="assets/images/headshoot.JPG" alt="Christian Taillon" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
                 </div>
-                <div class="mt-auto space-y-3">
+                <div class="space-y-3">
                     <div class="mb-2">
                          <div class="text-[10px] text-neon-yellow uppercase tracking-widest mb-1">Principal Consultant</div>
                          <div class="text-sm font-bold text-[var(--text-main)]">Christian Taillon</div>
                     </div>
                     <div class="flex gap-2" onclick="event.stopPropagation()">
                         <a href="https://linkedin.com/in/christian-taillon" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-colors text-center text-[10px] font-mono uppercase">LinkedIn</a>
-                        <a href="https://christiant.io" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-neon-yellow hover:text-black hover:border-neon-yellow transition-colors text-center text-[10px] font-mono uppercase">Website</a>
+                        <a href="https://christiant.io" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-neon-yellow hover:text-black hover:border-neon-yellow transition-colors text-center text-[10px] font-mono uppercase">Blog</a>
                     </div>
                 </div>
             </div>
@@ -270,7 +270,9 @@
                             <div class="text-sm font-display text-[var(--text-main)] mb-1">Open Source</div>
                             <p class="text-[10px] text-[var(--text-muted)] mt-1 leading-tight">Building public goods & community tools.</p>
                         </div>
-                        <div class="flex flex-wrap gap-2 mt-2">
+                        <div class="flex gap-2 mt-2" onclick="event.stopPropagation()">
+                            <a href="https://github.com/christian-taillon" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-colors text-center text-[10px] font-mono uppercase">GitHub</a>
+                            <a href="https://openwebui.com/u/christiant" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-electric-blue hover:text-black hover:border-electric-blue transition-colors text-center text-[10px] font-mono uppercase">OpenWebUI</a>
                         </div>
                     </div>
                 </div>
@@ -289,7 +291,7 @@
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 mt-2">
-                            <span class="tag-pill text-[0.5rem] px-1.5">Talks</span>
+                            <!-- Tags removed -->
                         </div>
                     </div>
                 </div>
@@ -376,6 +378,7 @@
         <!-- Footer -->
         <footer class="mt-12 border-t border-border-gray pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase text-[var(--text-muted)] font-mono gap-2">
             <div>Dark Roast Cyber © 2025</div>
+            <button onclick="openModal('contact')" class="hover:text-[var(--text-main)] transition-colors cursor-pointer">Contact</button>
         </footer>
 
     </main>
@@ -529,6 +532,14 @@
 
         // --- CONTENT DATA ---
         const contentData = {
+            contact: {
+                title: "Contact",
+                subtitle: "Secure Communication",
+                body: `<p><a href="mailto:public@christiant.io" class="text-[var(--text-main)] hover:underline">public(AT)christiant.io</a></p>
+                       <p>Encrypt your email to me: <a href="https://christiant.io/download/publickey.public@christiant.io-579bc0994c9c8556e77d3bcb83bac562e20e6130.asc" target="_blank" class="text-neon-green hover:underline">PGP Public Key</a></p>`,
+                tags: ["Email", "PGP", "Secure"],
+                icon: `<svg class="w-10 h-10 text-[var(--text-main)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`
+            },
             hero: {
                 title: "Dark Roast Cyber",
                 subtitle: "Mission Profile",
