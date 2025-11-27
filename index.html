@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Roast Cyber | Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'neon-pink': 'var(--color-pink)',
+                        'electric-blue': 'var(--color-blue)',
+                        'neon-yellow': 'var(--color-yellow)',
+                        'neon-green': 'var(--color-green)',
+                        'neon-purple': 'var(--color-purple)', // NEW COLOR
+                        
+                        'true-black': '#050505',
+                        'off-black': '#0a0a0a',
+                        'panel-gray': '#121212',
+                        'border-gray': '#262626',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            /* Default Dark Mode Variables */
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-bg-hover: #0a0a0a;
+            
+            /* --- THE PALETTE (Dark Mode / Neon) --- */
+            --color-pink: #ff1493;
+            --color-blue: #00bfff;
+            --color-yellow: #ffff00;
+            --color-green: #00ff00;
+            --color-purple: #bf00ff; /* Electric Purple */
+        }
+
+        /* --- LIGHT MODE OVERRIDES --- */
+        html.light {
+            --bg-color: #f3f4f6;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --card-border: rgba(0, 0, 0, 0.1);
+            --card-bg-hover: #ffffff;
+            
+            --color-yellow: #ea580c; /* Readable Orange */
+            --color-blue: #0284c7;   
+            --color-pink: #db2777;   
+            --color-green: #16a34a; 
+            --color-purple: #9333ea; /* Readable Purple */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            cursor: default;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* --- PARTICLE BACKGROUND --- */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- BENTO CARD STYLES --- */
+        .bento-card {
+            background-color: transparent; 
+            border: 1px solid var(--card-border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .bento-card:hover { 
+            transform: scale(1.02); 
+            background-color: var(--card-bg-hover);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+        }
+
+        /* Specific Color Cards */
+        .card-yellow { border-color: var(--card-border); }
+        .card-yellow:hover { border-color: var(--color-yellow); box-shadow: 0 0 30px -5px var(--color-yellow); }
+        
+        .card-blue { border-color: var(--card-border); }
+        .card-blue:hover { border-color: var(--color-blue); box-shadow: 0 0 30px -5px var(--color-blue); }
+
+        .card-green { border-color: var(--card-border); }
+        .card-green:hover { border-color: var(--color-green); box-shadow: 0 0 30px -5px var(--color-green); }
+
+        .card-pink { border-color: var(--card-border); }
+        .card-pink:hover { border-color: var(--color-pink); box-shadow: 0 0 30px -5px var(--color-pink); }
+        
+        .card-purple { border-color: var(--card-border); }
+        .card-purple:hover { border-color: var(--color-purple); box-shadow: 0 0 30px -5px var(--color-purple); }
+
+        /* Gray/Profile Card */
+        .card-gray { border-color: var(--card-border); }
+        .card-gray:hover { border-color: var(--text-muted); box-shadow: 0 0 30px -5px rgba(128, 128, 128, 0.1); }
+
+        /* Tag Pills */
+        .tag-pill {
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(128, 128, 128, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 0.5rem;
+            font-size: 0.625rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .card-blue:hover .tag-pill { background-color: rgba(0, 191, 255, 0.05); border-color: var(--color-blue); color: var(--color-blue); }
+        .card-green:hover .tag-pill { background-color: rgba(0, 255, 0, 0.05); border-color: var(--color-green); color: var(--color-green); }
+        .card-pink:hover .tag-pill { background-color: rgba(255, 20, 147, 0.05); border-color: var(--color-pink); color: var(--color-pink); }
+        .card-purple:hover .tag-pill { background-color: rgba(191, 0, 255, 0.05); border-color: var(--color-purple); color: var(--color-purple); }
+        .card-yellow:hover .tag-pill { background-color: rgba(255, 255, 0, 0.05); border-color: var(--color-yellow); color: var(--color-yellow); }
+
+        /* Modal Transitions */
+        #info-modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
+        #info-modal.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        #info-modal:not(.hidden) { opacity: 1; visibility: visible; pointer-events: auto; }
+        
+        #modal-content { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        #info-modal.hidden #modal-content { transform: scale(0.95) translateY(10px); }
+        #info-modal:not(.hidden) #modal-content { transform: scale(1) translateY(0); }
+
+        ::selection { background: var(--color-yellow); color: #000; }
+        
+        .theme-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.5rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle-btn:hover {
+            border-color: var(--text-main);
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased relative min-h-screen flex flex-col items-center p-4 md:p-8 lg:p-12 overflow-hidden transition-colors duration-300">
+
+    <!-- Interactive Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Main Dashboard Layout -->
+    <main class="relative z-10 w-full max-w-7xl mx-auto pb-20 opacity-100" id="main-content">
+        
+        <!-- Header -->
+        <header class="flex justify-between items-end mb-8 border-b border-border-gray pb-4 px-2 bg-transparent">
+            <div>
+                <h1 class="font-mono text-xs tracking-[0.2em] text-neon-yellow uppercase mb-2">
+                    EST. SPRING 2025
+                </h1>
+                <div class="font-display font-bold text-xl tracking-tight text-[var(--text-main)]">Dark Roast Cyber</div>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <nav class="hidden md:flex font-mono text-xs text-gray-500 items-center gap-6">
+                    <button onclick="openModal('ai')" class="hover:text-electric-blue transition-colors cursor-pointer uppercase">Architectural</button>
+                    <span class="text-gray-800">/</span>
+                    <button onclick="openModal('consulting')" class="hover:text-neon-purple transition-colors cursor-pointer uppercase">Consulting</button>
+                    <span class="text-gray-800">/</span>
+                    <button onclick="openModal('engineering')" class="hover:text-neon-green transition-colors cursor-pointer uppercase">Engineering</button>
+                </nav>
+
+                <!-- Light Mode Toggle -->
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+                    <svg id="icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Bento Grid: Switched to 6 Columns for easier 3-Pillar layout -->
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-4 auto-rows-[minmax(200px,auto)]">
+            
+            <!-- 1. HERO CARD (Takes 3/6 columns = 50%) -->
+            <div class="bento-card card-yellow md:col-span-3 md:row-span-2 group" onclick="openModal('hero')" id="hero-card">
+                <div class="absolute top-6 right-6 group-hover:scale-110 transition-transform duration-300">
+                    <img src="assets/images/drc_logo_white-001.png" alt="Logo" class="w-16 h-16 object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-full">
+                </div>
+                <div class="mt-8">
+                    <div>
+                        <h2 class="font-display text-5xl md:text-7xl font-bold tracking-tighter leading-[0.9] text-[var(--text-main)]">
+                            DARK <br>
+                            ROAST <br>
+                            <span class="text-neon-yellow font-normal italic">CYBER</span>
+                        </h2>
+                    </div>
+                </div>
+                <div class="mt-8 max-w-md">
+                    <p class="font-mono text-[10px] text-neon-yellow uppercase tracking-widest mb-2">// Mission Profile</p>
+                    <p class="font-sans text-sm text-[var(--text-muted)] leading-relaxed min-h-[40px]">Architectural. Engineering. Consulting.</p>
+                </div>
+            </div>
+
+            <!-- 2. PROFILE CARD (Takes 2/6 columns = 33%) -->
+            <div class="bento-card card-gray md:col-span-2 md:row-span-2 group p-6" onclick="openModal('profile')">
+                <div class="w-full aspect-square bg-panel-gray mb-6 rounded-2xl border border-border-gray flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
+                     <img src="assets/images/headshoot.JPG" alt="Christian Taillon" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="mt-auto space-y-3">
+                    <div class="mb-2">
+                         <div class="text-[10px] text-neon-yellow uppercase tracking-widest mb-1">Principal Consultant</div>
+                         <div class="text-sm font-bold text-[var(--text-main)]">Christian Taillon</div>
+                    </div>
+                    <div class="flex gap-2" onclick="event.stopPropagation()">
+                        <a href="https://linkedin.com/in/christian-taillon" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-colors text-center text-[10px] font-mono uppercase">LinkedIn</a>
+                        <a href="https://christiant.io" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-neon-yellow hover:text-black hover:border-neon-yellow transition-colors text-center text-[10px] font-mono uppercase">Website</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wrapper for Small Cards (Takes 1/6 columns = 17%, Stacks Vertically) -->
+            <div class="md:col-span-1 md:row-span-2 flex flex-col gap-4">
+                <!-- 3. OPEN SOURCE -->
+                <div class="bento-card card-blue group flex-1" onclick="openModal('opensource')">
+                    <div class="flex flex-col h-full justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <svg class="w-6 h-6 text-electric-blue" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                            </div>
+                            <div class="text-sm font-display text-[var(--text-main)] mb-1">Open Source</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="tag-pill text-[0.5rem] px-1.5">Goods</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. PUBLIC SPEAKING -->
+                <div class="bento-card card-yellow group flex-1" onclick="openModal('speaking')">
+                    <div class="flex flex-col h-full justify-between">
+                        <div>
+                            <div class="mb-2">
+                                <svg class="w-6 h-6 text-neon-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                            </div>
+                            <div class="text-sm font-display text-[var(--text-main)] mb-1">Speaking</div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="tag-pill text-[0.5rem] px-1.5">Talks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- --- THE 3 PILLARS ROW (2 cols each = 6 total) --- -->
+
+            <!-- 5. SOLUTIONS ARCHITECTURE -->
+            <div class="bento-card card-blue md:col-span-2 group" onclick="openModal('ai')">
+                <div class="flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        <h3 class="font-display text-xl text-[var(--text-main)] group-hover:text-electric-blue transition-colors">Solutions Architecture</h3>
+                    </div>
+                    <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-6 flex-grow">
+                        Basic security controls, SIEM, and automation. <span class="group-hover:text-[var(--text-main)] transition-colors">Self-hosted or Enterprise</span>.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill">SIEM</span>
+                        <span class="tag-pill">Agents</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. STRATEGIC CONSULTING (New Purple) -->
+            <div class="bento-card card-purple md:col-span-2 group" onclick="openModal('consulting')">
+                <div class="flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-4">
+                        <!-- Strategy Icon -->
+                        <svg class="w-8 h-8 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        <h3 class="font-display text-xl text-[var(--text-main)] group-hover:text-neon-purple transition-colors">Strategic Consulting</h3>
+                    </div>
+                    <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-6 flex-grow">
+                        Leadership and program development. <span class="group-hover:text-[var(--text-main)] transition-colors">vCISO services</span> and maturity assessments.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill">Strategy</span>
+                        <span class="tag-pill">vCISO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. SECURITY ENGINEERING -->
+            <div class="bento-card card-green md:col-span-2 group" onclick="openModal('engineering')">
+                <div class="flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="w-8 h-8 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        <h3 class="font-display text-xl text-[var(--text-main)] group-hover:text-neon-green transition-colors">Security Engineering</h3>
+                    </div>
+                    <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-6 flex-grow">
+                        Hardening, <span class="group-hover:text-[var(--text-main)] transition-colors">Vulnerability Mgmt</span>, and EDR implementation.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill">Hardening</span>
+                        <span class="tag-pill">EDR</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. THREAT INTELLIGENCE (Bottom Row - Full Width) -->
+            <div class="bento-card card-pink md:col-span-6 group" onclick="openModal('threatintel')">
+                <div class="flex flex-col md:flex-row gap-8 h-full">
+                     <div class="flex-1 flex flex-col items-start">
+                         <div class="flex items-center gap-3 mb-3">
+                             <svg class="w-8 h-8 text-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                             <h3 class="font-display text-xl md:text-2xl text-[var(--text-main)] group-hover:text-neon-pink transition-colors">Cyber Threat Intelligence</h3>
+                        </div>
+                        <p class="text-[var(--text-muted)] text-sm leading-relaxed flex-grow">
+                            Deep open-source and closed-source intelligence gathering to anticipate threats. Actionable insights derived from analyzing adversary behaviors.
+                        </p>
+                    </div>
+                    <div class="flex items-end">
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tag-pill">Advisory</span>
+                            <span class="tag-pill">CTI</span>
+                            <span class="tag-pill">Research</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 border-t border-border-gray pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase text-[var(--text-muted)] font-mono gap-2">
+            <div>Dark Roast Cyber © 2025</div>
+        </footer>
+
+    </main>
+
+    <!-- Modal Overlay -->
+    <div id="info-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden" onclick="closeModal(event)">
+        <div id="modal-content" class="bg-[var(--card-bg-hover)] border border-[var(--card-border)] rounded-3xl w-full max-w-2xl p-8 relative shadow-2xl" onclick="event.stopPropagation()">
+            <button onclick="closeModal(event)" class="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors">
+                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="flex items-start gap-4 mb-6">
+                <div id="modal-icon" class="text-2xl pt-1"></div>
+                <div>
+                    <!-- DECRYPT EFFECT TARGET -->
+                    <h3 id="modal-title" class="font-display text-2xl font-bold text-[var(--text-main)]"></h3>
+                    <div id="modal-subtitle" class="text-xs font-mono uppercase tracking-widest mt-1 text-[var(--text-muted)]"></div>
+                </div>
+            </div>
+            <!-- Modal Body with Typing Cursor -->
+            <div id="modal-body" class="text-[var(--text-muted)] text-sm leading-relaxed space-y-4"></div>
+            <!-- Dynamic List Area (For Speaking Engagements) -->
+            <ul id="modal-list" class="mt-6 space-y-2 text-sm text-[var(--text-muted)] font-mono hidden"></ul>
+            <div id="modal-tags" class="flex gap-2 mt-8 flex-wrap"></div>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script>
+        // --- 5. DARK/LIGHT MODE TOGGLE ---
+        const html = document.documentElement;
+        const toggleBtn = document.getElementById('theme-toggle');
+        const iconSun = document.getElementById('icon-sun');
+        const iconMoon = document.getElementById('icon-moon');
+
+        function updateIcons() {
+            if (html.classList.contains('light')) {
+                iconMoon.classList.add('hidden');
+                iconSun.classList.remove('hidden');
+            } else {
+                iconMoon.classList.remove('hidden');
+                iconSun.classList.add('hidden');
+            }
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            html.classList.toggle('light');
+            updateIcons();
+            resizeCanvas(); 
+        });
+
+        updateIcons();
+
+        // --- PARTICLE BACKGROUND ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null };
+
+        function getComputedColors() {
+            const style = getComputedStyle(document.body);
+            return [
+                style.getPropertyValue('--color-pink').trim(),
+                style.getPropertyValue('--color-blue').trim(),
+                style.getPropertyValue('--color-yellow').trim(),
+                style.getPropertyValue('--color-green').trim(),
+                style.getPropertyValue('--color-purple').trim()
+            ];
+        }
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles(); 
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                const colors = getComputedColors();
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 4 + 2; 
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx*dx + dy*dy);
+                    if (distance < 150) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (150 - distance) / 150;
+                        this.x += forceDirectionX * force * 0.5;
+                        this.y += forceDirectionY * force * 0.5;
+                    }
+                }
+            }
+            draw() {
+                ctx.globalAlpha = 0.6;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const numberOfParticles = (canvas.width * canvas.height) / 10000; 
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx*dx + dy*dy);
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = particles[i].color;
+                        ctx.globalAlpha = 0.2 * (1 - distance/120);
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                        ctx.globalAlpha = 1.0;
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+        setTimeout(() => { resizeCanvas(); animateParticles(); }, 100);
+
+        // --- CONTENT DATA ---
+        const contentData = {
+            hero: {
+                title: "Dark Roast Cyber",
+                subtitle: "Mission Profile",
+                body: `<p>Dark Roast Cyber is a boutique consultancy focused on three core pillars: <strong class="text-electric-blue">Architectural</strong> design of secure systems, <strong class="text-neon-green">Engineering</strong> and implementation of defensive platforms, and <strong class="text-neon-purple">Strategic Consulting</strong> for security initiatives.</p>`,
+                tags: ["Consultancy", "Architecture", "Engineering", "Strategy"],
+                icon: `<svg class="w-10 h-10 text-neon-yellow" fill="currentColor" viewBox="0 0 24 24"><path d="M18.5,4.5c-1.5-1.5-3.5-2-5.5-1.5c-2,0.5-3.5,2-4.5,4c-0.5,1-0.5,2.5,0,3.5c0.5,1,2,1.5,3.5,1.5 c2,0,4-1,5.5-2.5c1.5-1.5,2-3.5,1.5-5.5C19,3.5,18.5,4.5,18.5,4.5z M2,21h20v-2H2V21z M4,17h16v-2H4V17z"/></svg>`
+            },
+            profile: {
+                title: "Christian Taillon",
+                subtitle: "Principal Consultant",
+                body: `<p>Christian is a security engineer and architect with a career spanning offensive security, intelligence, and software engineering.</p>
+                       <p>Currently, he is focused on the intersection of <strong class="text-electric-blue">Artificial Intelligence</strong> and <strong class="text-neon-green">Cybersecurity</strong>. He researches how to harden agentic workflows, secure self-hosted LLMs, and use AI to augment offensive security capabilities.</p>`,
+                tags: ["Principal", "Architect", "Engineer", "Speaker"],
+                icon: `<svg class="w-10 h-10 text-[var(--text-main)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.2-2.858.59-4.18M5.5 19.5c.323-2.924 1.4-5.612 3-7.928M16.25 20c.964-1.576 1.75-3.318 2.222-5.166m-1.222-7.834a9 9 0 00-10.5 0"></path></svg>`
+            },
+            opensource: {
+                title: "Open Source & Sponsorship",
+                subtitle: "Building Public Goods",
+                body: `<p>We maintain and contribute to Open Source tools often supporting cybersecurity and AI communities.</p>
+                       <p>Our focus is on making useful systems accessible, conducting security research, and building robust AI platforms.</p>`,
+                tags: ["GitHub Sponsor", "Community", "Tooling"],
+                icon: `<svg class="w-10 h-10 text-electric-blue" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>`
+            },
+            speaking: {
+                title: "Public Speaking",
+                subtitle: "Advisory & Education",
+                body: `<p>I present across various Cyber Security topics for varying audiences—from general audience keynotes to technical workshops and breakthrough research sessions.</p>
+                       <p>Topics include the evolving threat landscape, security trends, adversary tradecraft (including tool bypassing), and deep dives into emerging or prolific threat groups.</p>`,
+                speakingTopics: [
+                    "The Future of AI & Cyber Defense",
+                    "Adversary Emulation & Tool Bypassing",
+                    "Emerging Threat Groups 2025",
+                    "Secure Architecture for GenAI Agents"
+                ],
+                tags: ["Keynotes", "Workshops", "Presentations"],
+                icon: `<svg class="w-10 h-10 text-neon-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>`
+            },
+            ai: {
+                title: "Solutions Architecture",
+                subtitle: "Security & AI Architecture",
+                body: `<p>We start with basic <strong class="text-electric-blue">security controls and program design</strong>, focusing on SIEM, automation, and firewall architecture.</p>
+                       <p>Self-hosted is optional; we also support private enterprise inference providers. We build integrations and tooling to enable security platforms, occasionally through <strong class="text-electric-blue">Agentic solutions</strong>.</p>
+                       <p><strong>AI Specialties:</strong> Designing inference filters, data privacy protection for business environments, and creating custom tooling for models (using Native tooling, MCP, and direct OpenAPI).</p>`,
+                tags: ["SIEM", "Automation", "Firewall", "AI Agents", "MCP"],
+                icon: `<svg class="w-10 h-10 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`
+            },
+            consulting: {
+                title: "Strategic Consulting",
+                subtitle: "Strategic Guidance",
+                body: `<p>Strategic security leadership and program development. We provide <strong class="text-neon-purple">vCISO services</strong>, maturity assessments, and roadmap planning to align security initiatives with business goals.</p>`,
+                tags: ["vCISO", "Strategy", "Assessment", "Roadmap"],
+                icon: `<svg class="w-10 h-10 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>`
+            },
+            engineering: {
+                title: "Security Engineering",
+                subtitle: "Engineering Services",
+                body: `<p>Building defense into the DNA of your infrastructure. We provide hands-on engineering for platform hardening and detection.</p>
+                       <p>Core capabilities include <strong class="text-neon-green">EDR implementation</strong>, <strong class="text-neon-green">Vulnerability Management</strong> programs, Linux system hardening, and Cloudflare edge protection.</p>`,
+                tags: ["Engineering", "Hardening", "EDR", "Vuln Mgmt", "Cloudflare"],
+                icon: `<svg class="w-10 h-10 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>`
+            },
+            threatintel: {
+                title: "Cyber Threat Intelligence",
+                subtitle: "Advisory & Research",
+                body: `<p>Strategic advisory powered by deep research. We conduct both open-source and closed-source intelligence gathering to understand the adversary.</p>
+                       <p>This service helps organizations anticipate threats rather than just reacting to them. We provide actionable insights derived from analyzing threat actor behaviors and campaigns.</p>`,
+                tags: ["Advisory", "Research", "CTI", "Strategy"],
+                icon: `<svg class="w-10 h-10 text-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>`
+            }
+        };
+
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+        
+        function decryptText(element, targetText) {
+            let iterations = 0;
+            const interval = setInterval(() => {
+                element.innerText = targetText
+                    .split("")
+                    .map((letter, index) => {
+                        if(index < iterations) {
+                            return targetText[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)]
+                    })
+                    .join("");
+                
+                if(iterations >= targetText.length) { 
+                    clearInterval(interval);
+                    element.innerText = targetText; 
+                }
+                
+                iterations += 1/2; 
+            }, 30);
+        }
+
+        let typingSessionId = 0; 
+        function typeHTML(container, htmlString, speed = 10) {
+            container.innerHTML = '';
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlString;
+            const currentSession = ++typingSessionId;
+            function typeNode(node, parent) {
+                if (currentSession !== typingSessionId) return Promise.resolve();
+                if (node.nodeType === Node.TEXT_NODE) {
+                    const text = node.textContent;
+                    let textNode = document.createTextNode('');
+                    parent.appendChild(textNode);
+                    let i = 0;
+                    return new Promise(resolve => {
+                        function typeChar() {
+                            if (currentSession !== typingSessionId) { resolve(); return; }
+                            if (i < text.length) {
+                                textNode.textContent += text.charAt(i);
+                                i++;
+                                setTimeout(typeChar, speed);
+                            } else {
+                                resolve();
+                            }
+                        }
+                        typeChar();
+                    });
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    const element = document.createElement(node.tagName);
+                    Array.from(node.attributes).forEach(attr => {
+                        element.setAttribute(attr.name, attr.value);
+                    });
+                    parent.appendChild(element);
+                    return Array.from(node.childNodes).reduce((promise, child) => {
+                        return promise.then(() => typeNode(child, element));
+                    }, Promise.resolve());
+                }
+                return Promise.resolve();
+            }
+            Array.from(tempDiv.childNodes).reduce((promise, child) => {
+                return promise.then(() => typeNode(child, container));
+            }, Promise.resolve());
+        }
+
+        function openModal(id) {
+            const data = contentData[id];
+            if (!data) return;
+
+            document.getElementById('modal-icon').innerHTML = data.icon;
+            
+            const titleEl = document.getElementById('modal-title');
+            decryptText(titleEl, data.title);
+            
+            document.getElementById('modal-subtitle').textContent = data.subtitle;
+            
+            const modalBody = document.getElementById('modal-body');
+            typeHTML(modalBody, data.body);
+            
+            const modalList = document.getElementById('modal-list');
+            modalList.innerHTML = '';
+            if (data.speakingTopics && data.speakingTopics.length > 0) {
+                modalList.classList.remove('hidden');
+                data.speakingTopics.forEach(topic => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start gap-2';
+                    li.innerHTML = `<span class="text-neon-yellow mt-1">➜</span> <span>${topic}</span>`;
+                    modalList.appendChild(li);
+                });
+            } else {
+                modalList.classList.add('hidden');
+            }
+            
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = '';
+            data.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider';
+                span.textContent = tag;
+                tagsContainer.appendChild(span);
+            });
+
+            document.getElementById('info-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(event) {
+            if (event.target.id === 'info-modal' || event.currentTarget.tagName === 'BUTTON') {
+                document.getElementById('info-modal').classList.add('hidden');
+                document.body.style.overflow = 'auto'; 
+                typingSessionId++; 
+            }
+        }
+    </script>
+</body>
+</html>
