@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark Roast Cyber | Dashboard</title>
     
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -238,7 +243,7 @@
 
             <!-- 2. PROFILE CARD (Takes 2/8 columns = 25%) -->
             <div class="bento-card card-gray md:col-span-2 md:row-span-2 group p-6" onclick="openModal('profile')">
-                <div class="w-full aspect-square bg-panel-gray mb-6 rounded-2xl border border-border-gray flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
+                <div class="w-full aspect-[4/5] bg-panel-gray mb-6 rounded-2xl border border-border-gray flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
                      <img src="assets/images/headshoot.JPG" alt="Christian Taillon" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
                 </div>
                 <div class="mt-auto space-y-3">
@@ -263,6 +268,7 @@
                                 <svg class="w-6 h-6 text-electric-blue" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
                             </div>
                             <div class="text-sm font-display text-[var(--text-main)] mb-1">Open Source</div>
+                            <p class="text-[10px] text-[var(--text-muted)] mt-1 leading-tight">Building public goods & community tools.</p>
                         </div>
                         <div class="flex flex-wrap gap-2 mt-2">
                         </div>
@@ -528,7 +534,7 @@
                 subtitle: "Mission Profile",
                 body: `<p>Dark Roast Cyber is a boutique consultancy focused on three core pillars: <strong class="text-electric-blue">Architectural</strong> design of secure systems, <strong class="text-neon-green">Engineering</strong> and implementation of defensive platforms, and <strong class="text-neon-purple">Strategic Consulting</strong> for security initiatives.</p>`,
                 tags: ["Consultancy", "Architecture", "Engineering", "Strategy"],
-                icon: `<svg class="w-10 h-10 text-neon-yellow" fill="currentColor" viewBox="0 0 24 24"><path d="M18.5,4.5c-1.5-1.5-3.5-2-5.5-1.5c-2,0.5-3.5,2-4.5,4c-0.5,1-0.5,2.5,0,3.5c0.5,1,2,1.5,3.5,1.5 c2,0,4-1,5.5-2.5c1.5-1.5,2-3.5,1.5-5.5C19,3.5,18.5,4.5,18.5,4.5z M2,21h20v-2H2V21z M4,17h16v-2H4V17z"/></svg>`
+                icon: `<img src="assets/images/drc_logo_white-001.png" alt="DRC Logo" class="w-10 h-10 object-contain">`
             },
             profile: {
                 title: "Christian Taillon",
