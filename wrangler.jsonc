@@ -1,8 +1,0 @@
-{
-  "name": "drc-website",
-  "compatibility_date": "2025-11-27",
-  "pages_build_output_dir": "./public",
-  "assets": {
-    "directory": "./public"
-  }
-}
