@@ -68,7 +68,7 @@
             --bg-color: #f3f4f6;
             --text-main: #111827;
             --text-muted: #4b5563;
-            --card-border: rgba(0, 0, 0, 0.2); /* Darker border for visibility */
+            --card-border: #262626; /* Dark black to match pills */
             --card-bg-hover: #ffffff;
             
             --color-yellow: #ea580c; /* Readable Orange */
@@ -260,7 +260,7 @@
 
             <!-- 2. PROFILE CARD (Takes 3/12 columns = 25%) -->
             <div class="bento-card card-gray md:col-span-3 md:row-span-2 group p-6" onclick="openModal('profile')">
-                <div class="w-full aspect-[4/5] bg-panel-gray mb-6 rounded-2xl border border-border-gray flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
+                <div class="w-full aspect-[3/5] bg-panel-gray mb-4 rounded-2xl border border-border-gray flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
                      <img src="assets/images/headshoot.JPG" alt="Christian Taillon" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
                 </div>
                 <div class="space-y-3">
@@ -611,9 +611,9 @@
                 body: `<p>We start with back to basics. The advanced efforts will provide less progress and sometimes leverage basics as a prerequisite.</p>
                        <p>We build <strong class="text-electric-blue">security controls and program design</strong>, focusing on SIEM, automation, and firewall architecture.</p>
                        <div class="mt-4 pt-4 border-t border-gray-700">
-                           <strong class="text-electric-blue">Self-Hosting</strong>
-                           <p>Self-hosted is optional; we also support private enterprise inference providers. We include <strong class="text-neon-green">Linux Hardening</strong> and <strong class="text-neon-green">EDR</strong> implementation as part of the foundation.</p>
-                           <p><strong>AI Specialties:</strong> Designing inference filters, data privacy protection for business environments, and creating custom tooling for models (using Native tooling, MCP, and direct OpenAPI).</p>
+                           <strong class="text-electric-blue">Local LLMs</strong>
+                           <p>Self-hosted Local LLM deployments with comprehensive security foundations. We include <strong class="text-neon-green">Linux Hardening</strong> and <strong class="text-neon-green">EDR</strong> implementation as part of the foundation.</p>
+                           <p><strong>AI Specialties:</strong> Designing inference filters, data privacy protection for business environments, and creating custom tooling for models (using Native tooling and MCP).</p>
                        </div>`,
                 tags: ["SIEM", "Automation", "Firewall", "AI Agents", "MCP"],
                 icon: `<svg class="w-10 h-10 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>`
