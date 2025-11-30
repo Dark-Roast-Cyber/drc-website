@@ -3,7 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Roast Cyber | Dashboard</title>
+    <title>Dark Roast Cyber | Security Consulting, Engineering & Intelligence</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Dark Roast Cyber: Arizona-based boutique cybersecurity consulting by Christian Taillon. Expert vCISO services, threat intelligence, and security engineering solutions.">
+    <meta name="keywords" content="Christian Taillon, Cyber Security Speaker, Dark Roast Cyber, Phoenix Arizona Cyber, Cyber Security Consulting, vCISO Services, Threat Intelligence, Security Engineering, Arizona Cyber Security, InfoSec">
+    <meta name="author" content="Christian Taillon">
+    <link rel="canonical" href="https://darkroastcyber.io/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://darkroastcyber.io/">
+    <meta property="og:title" content="Dark Roast Cyber | Security Consulting, Engineering & Intelligence">
+    <meta property="og:description" content="Dark Roast Cyber: Arizona-based boutique cybersecurity consulting by Christian Taillon. Expert vCISO services, threat intelligence, and security engineering solutions.">
+    <meta property="og:image" content="https://darkroastcyber.io/assets/images/drc_logo_white-001.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://darkroastcyber.io/">
+    <meta property="twitter:title" content="Dark Roast Cyber | Security Consulting, Engineering & Intelligence">
+    <meta property="twitter:description" content="Dark Roast Cyber: Arizona-based boutique cybersecurity consulting by Christian Taillon. Expert vCISO services, threat intelligence, and security engineering solutions.">
+    <meta property="twitter:image" content="https://darkroastcyber.io/assets/images/drc_logo_white-001.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Dark Roast Cyber",
+          "url": "https://darkroastcyber.io",
+          "logo": "https://darkroastcyber.io/assets/images/drc_logo_white-001.png",
+          "description": "Dark Roast Cyber is a Arizona based Cyber Security Solutions company founded by Christian Taillon in 2025 to provide boutique cyber security consulting and services.",
+          "founder": {
+            "@type": "Person",
+            "name": "Christian Taillon",
+            "jobTitle": "Principal Consultant",
+            "url": "https://christiant.io",
+            "sameAs": [
+              "https://linkedin.com/in/christian-taillon",
+              "https://github.com/christian-taillon",
+              "https://openwebui.com/u/christiant"
+            ]
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "AZ",
+            "addressCountry": "US"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "name": "Dark Roast Cyber",
+          "url": "https://darkroastcyber.io",
+          "author": {
+            "@type": "Person",
+            "name": "Christian Taillon"
+          }
+        }
+      ]
+    }
+    </script>
     
     <!-- Favicon -->
     <link rel="icon" href="assets/favicon/favicon.ico" sizes="any">
@@ -213,9 +274,9 @@
         <!-- Header -->
         <header class="flex justify-between items-end mb-8 border-b border-border-gray pb-4 px-2 bg-transparent">
             <div>
-                <h1 class="font-mono text-xs tracking-[0.2em] text-neon-yellow uppercase mb-2">
+                <p class="font-mono text-xs tracking-[0.2em] text-neon-yellow uppercase mb-2">
                     EST. SPRING 2025
-                </h1>
+                </p>
                 <div class="font-display font-bold text-xl tracking-tight text-[var(--text-main)]">Dark Roast Cyber</div>
             </div>
             
@@ -237,72 +298,72 @@
         </header>
 
         <!-- Bento Grid: Switched to 12 Columns for perfect thirds -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(200px,auto)]">
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(200px,auto)]">
             
             <!-- 1. HERO CARD (Takes 6/12 columns = 50%) -->
-            <div class="bento-card card-yellow md:col-span-6 md:row-span-2 group" onclick="openModal('hero')" id="hero-card">
+            <article class="bento-card card-yellow md:col-span-6 md:row-span-2 group" onclick="openModal('hero')" id="hero-card">
                 <div class="absolute top-6 right-6 group-hover:scale-110 transition-transform duration-300">
-                    <img src="assets/images/drc_logo_white-001.png" alt="Logo" class="w-16 h-16 object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-2xl">
+                    <img src="assets/images/drc_logo_white-001.png" alt="Dark Roast Cyber Logo" class="w-16 h-16 object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-2xl">
                 </div>
                 <div class="mt-8">
                     <div>
-                        <h2 class="font-display text-5xl md:text-7xl font-bold tracking-tighter leading-[0.9] text-[var(--text-main)]">
+                        <h1 class="font-display text-5xl md:text-7xl font-bold tracking-tighter leading-[0.9] text-[var(--text-main)]">
                             DARK <br>
                             ROAST <br>
                             <span class="text-neon-yellow font-normal italic">CYBER</span>
-                        </h2>
+                        </h1>
                     </div>
                 </div>
                 <div class="mt-8 max-w-md">
                     <p class="font-mono text-[10px] text-neon-yellow uppercase tracking-widest mb-2">// Mission Profile</p>
                     <p class="font-sans text-sm text-[var(--text-muted)] leading-relaxed min-h-[40px]">Architectural. Engineering. Consulting.</p>
                 </div>
-            </div>
+            </article>
 
             <!-- 2. PROFILE CARD (Takes 3/12 columns = 25%) -->
-            <div class="bento-card card-gray md:col-span-3 md:row-span-2 group p-6" onclick="openModal('profile')">
+            <article class="bento-card card-gray md:col-span-3 md:row-span-2 group p-6" onclick="openModal('profile')">
                 <div class="w-full aspect-[3/5] bg-panel-gray mb-4 rounded-2xl border border-border-gray flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
-                     <img src="assets/images/headshoot.JPG" alt="Christian Taillon" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
+                     <img src="assets/images/headshoot.JPG" alt="Christian Taillon - Principal Consultant" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
                 </div>
                 <div class="space-y-3">
                     <div class="mb-2">
                          <div class="text-[10px] text-neon-yellow uppercase tracking-widest mb-1">Principal Consultant</div>
-                         <div class="text-sm font-bold text-[var(--text-main)]">Christian Taillon</div>
+                         <h2 class="text-sm font-bold text-[var(--text-main)]">Christian Taillon</h2>
                     </div>
                     <div class="flex gap-2" onclick="event.stopPropagation()">
-                        <a href="https://linkedin.com/in/christian-taillon" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-colors text-center text-[10px] font-mono uppercase">LinkedIn</a>
-                        <a href="https://christiant.io" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-neon-yellow hover:text-black hover:border-neon-yellow transition-colors text-center text-[10px] font-mono uppercase">Blog</a>
+                        <a href="https://linkedin.com/in/christian-taillon" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-colors text-center text-[10px] font-mono uppercase">LinkedIn</a>
+                        <a href="https://christiant.io" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-neon-yellow hover:text-black hover:border-neon-yellow transition-colors text-center text-[10px] font-mono uppercase">Blog</a>
                     </div>
                 </div>
-            </div>
+            </article>
 
             <!-- Wrapper for Small Cards (Takes 3/12 columns = 25%, Stacks Vertically) -->
             <div class="md:col-span-3 md:row-span-2 flex flex-col gap-4">
                 <!-- 3. OPEN SOURCE -->
-                <div class="bento-card card-blue group flex-1" onclick="openModal('opensource')">
+                <article class="bento-card card-blue group flex-1" onclick="openModal('opensource')">
                     <div class="flex flex-col h-full justify-between">
                         <div>
                             <div class="flex justify-between items-start mb-2">
                                 <svg class="w-6 h-6 text-electric-blue" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
                             </div>
-                            <div class="text-sm font-display text-[var(--text-main)] mb-1">Open Source</div>
+                            <h3 class="text-sm font-display text-[var(--text-main)] mb-1">Open Source</h3>
                             <p class="text-[10px] text-[var(--text-muted)] mt-1 leading-tight">Building public goods & community tools.</p>
                         </div>
                         <div class="flex gap-2 mt-2" onclick="event.stopPropagation()">
-                            <a href="https://github.com/christian-taillon" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-colors text-center text-[10px] font-mono uppercase">GitHub</a>
-                            <a href="https://openwebui.com/u/christiant" target="_blank" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-electric-blue hover:text-black hover:border-electric-blue transition-colors text-center text-[10px] font-mono uppercase">OpenWebUI</a>
+                            <a href="https://github.com/christian-taillon" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-colors text-center text-[10px] font-mono uppercase">GitHub</a>
+                            <a href="https://openwebui.com/u/christiant" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-electric-blue hover:text-black hover:border-electric-blue transition-colors text-center text-[10px] font-mono uppercase">OpenWebUI</a>
                         </div>
                     </div>
-                </div>
+                </article>
 
                 <!-- 4. PUBLIC SPEAKING -->
-                <div class="bento-card card-yellow group flex-1" onclick="openModal('speaking')">
+                <article class="bento-card card-yellow group flex-1" onclick="openModal('speaking')">
                     <div class="flex flex-col h-full justify-between">
                         <div>
                             <div class="mb-2">
                                 <svg class="w-6 h-6 text-neon-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                             </div>
-                            <div class="text-sm font-display text-[var(--text-main)] mb-1">Speaking</div>
+                            <h3 class="text-sm font-display text-[var(--text-main)] mb-1">Speaking</h3>
                             <div class="text-[10px] text-neon-yellow mt-1 font-mono leading-tight">
                                 Upcoming Keynote:<br>
                                 10th Annual Cyber Southwest Symposium
@@ -312,13 +373,13 @@
                             <!-- Tags removed -->
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
 
             <!-- --- THE 3 PILLARS ROW (4 cols each = 12 total) --- -->
 
             <!-- 5. SOLUTIONS ARCHITECTURE -->
-            <div class="bento-card card-blue md:col-span-4 group" onclick="openModal('ai')">
+            <article class="bento-card card-blue md:col-span-4 group" onclick="openModal('ai')">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-4">
                         <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
@@ -335,7 +396,7 @@
             </div>
 
             <!-- 6. STRATEGIC CONSULTING (New Purple) -->
-            <div class="bento-card card-purple md:col-span-4 group" onclick="openModal('consulting')">
+            <article class="bento-card card-purple md:col-span-4 group" onclick="openModal('consulting')">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-4">
                         <!-- Strategy Icon -->
@@ -350,10 +411,10 @@
                         <span class="tag-pill">vCISO</span>
                     </div>
                 </div>
-            </div>
+            </article>
 
             <!-- 7. SECURITY ENGINEERING -->
-            <div class="bento-card card-green md:col-span-4 group" onclick="openModal('engineering')">
+            <article class="bento-card card-green md:col-span-4 group" onclick="openModal('engineering')">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-4">
                         <svg class="w-8 h-8 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
@@ -367,10 +428,10 @@
                         <span class="tag-pill">EDR</span>
                     </div>
                 </div>
-            </div>
+            </article>
 
             <!-- 8. THREAT INTELLIGENCE (Bottom Row - Full Width) -->
-            <div class="bento-card card-pink md:col-span-12 group" onclick="openModal('threatintel')">
+            <article class="bento-card card-pink md:col-span-12 group" onclick="openModal('threatintel')">
                 <div class="flex flex-col md:flex-row gap-8 h-full">
                      <div class="flex-1 flex flex-col items-start">
                          <div class="flex items-center gap-3 mb-3">
@@ -389,9 +450,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </article>
 
-        </div>
+        </section>
 
         <!-- Footer -->
         <footer class="mt-12 border-t border-border-gray pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase text-[var(--text-muted)] font-mono gap-2">
