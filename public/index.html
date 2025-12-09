@@ -314,9 +314,14 @@
                         </h1>
                     </div>
                 </div>
-                <div class="mt-8 max-w-md">
-                    <p class="font-mono text-[10px] text-neon-yellow uppercase tracking-widest mb-2">// Mission Profile</p>
-                    <p class="font-sans text-sm text-[var(--text-muted)] leading-relaxed min-h-[40px]">Architectural. Engineering. Consulting.</p>
+                <div class="mt-8 w-full flex flex-col md:flex-row justify-between items-end gap-4">
+                    <div class="max-w-md">
+                        <p class="font-mono text-[10px] text-neon-yellow uppercase tracking-widest mb-2">// Mission Profile</p>
+                        <p class="font-sans text-sm text-[var(--text-muted)] leading-relaxed min-h-[40px]">Architectural. Engineering. Consulting.</p>
+                    </div>
+                    <a href="https://percolate.pages.dev" target="_blank" onclick="event.stopPropagation()" class="bg-neon-yellow text-black font-mono text-[10px] uppercase font-bold py-2 px-4 rounded-lg hover:scale-105 transition-transform inline-block mb-1 shadow-lg shadow-yellow-500/20">
+                        ☕ Percolate CTI News Curator & Aggregator
+                    </a>
                 </div>
             </article>
 
@@ -627,7 +632,12 @@
                 theme: "yellow",
                 title: "Dark Roast Cyber",
                 subtitle: "Mission Profile",
-                body: `<p>Dark Roast Cyber is a boutique consultancy focused on three core pillars: <strong class="text-electric-blue">Architectural</strong> design of secure systems, <strong class="text-neon-green">Engineering</strong> and implementation of defensive platforms, and <strong class="text-neon-purple">Strategic Consulting</strong> for security initiatives.</p>`,
+                body: `<p>Dark Roast Cyber is a boutique consultancy focused on three core pillars: <strong class="text-electric-blue">Architectural</strong> design of secure systems, <strong class="text-neon-green">Engineering</strong> and implementation of defensive platforms, and <strong class="text-neon-purple">Strategic Consulting</strong> for security initiatives.</p>
+                       <div class="mt-6">
+                           <a href="https://percolate.pages.dev" target="_blank" class="bg-neon-yellow text-black font-mono text-[10px] uppercase font-bold py-2 px-4 rounded-lg hover:scale-105 transition-transform inline-block shadow-lg shadow-yellow-500/20">
+                               ☕ Percolate CTI News Curator & Aggregator
+                           </a>
+                       </div>`,
                 tags: ["Consultancy", "Architecture", "Engineering", "Strategy"],
                 icon: `<img src="assets/images/drc_logo_white-001.png" alt="DRC Logo" class="w-10 h-10 object-contain">`
             },
