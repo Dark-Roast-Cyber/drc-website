@@ -319,9 +319,6 @@
                         <p class="font-mono text-[10px] text-neon-yellow uppercase tracking-widest mb-2">// Mission Profile</p>
                         <p class="font-sans text-sm text-[var(--text-muted)] leading-relaxed min-h-[40px]">Architectural. Engineering. Consulting.</p>
                     </div>
-                    <a href="https://percolate.pages.dev" target="_blank" onclick="event.stopPropagation()" class="bg-neon-yellow text-black font-mono text-[10px] uppercase font-bold py-2 px-4 rounded-lg hover:scale-105 transition-transform inline-block mb-1 shadow-lg shadow-yellow-500/20">
-                        ☕ Percolate CTI News Curator & Aggregator
-                    </a>
                 </div>
             </article>
 
@@ -439,9 +436,10 @@
             <article class="bento-card card-pink md:col-span-12 group" onclick="openModal('threatintel')">
                 <div class="flex flex-col md:flex-row gap-8 h-full">
                      <div class="flex-1 flex flex-col items-start">
-                         <div class="flex items-center gap-3 mb-3">
+                         <div class="flex flex-wrap items-center gap-3 mb-3">
                              <svg class="w-8 h-8 text-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                              <h3 class="font-display text-xl md:text-2xl text-[var(--text-main)] group-hover:text-neon-pink transition-colors">Cyber Threat Intelligence</h3>
+                             <a href="https://percolate.pages.dev" target="_blank" onclick="event.stopPropagation()" class="bg-neon-pink text-black font-mono text-[10px] uppercase font-bold py-2 px-4 rounded-lg hover:scale-105 transition-transform inline-block shadow-lg shadow-pink-500/20 whitespace-nowrap">☕ Percolate CTI Aggregator</a>
                         </div>
                         <p class="text-[var(--text-muted)] text-sm leading-relaxed flex-grow">
                             Deep open-source and closed-source intelligence gathering to anticipate threats. Actionable insights derived from analyzing adversary behaviors.
@@ -632,12 +630,7 @@
                 theme: "yellow",
                 title: "Dark Roast Cyber",
                 subtitle: "Mission Profile",
-                body: `<p>Dark Roast Cyber is a boutique consultancy focused on three core pillars: <strong class="text-electric-blue">Architectural</strong> design of secure systems, <strong class="text-neon-green">Engineering</strong> and implementation of defensive platforms, and <strong class="text-neon-purple">Strategic Consulting</strong> for security initiatives.</p>
-                       <div class="mt-6">
-                           <a href="https://percolate.pages.dev" target="_blank" class="bg-neon-yellow text-black font-mono text-[10px] uppercase font-bold py-2 px-4 rounded-lg hover:scale-105 transition-transform inline-block shadow-lg shadow-yellow-500/20">
-                               ☕ Percolate CTI News Curator & Aggregator
-                           </a>
-                       </div>`,
+                body: `<p>Dark Roast Cyber is a boutique consultancy focused on three core pillars: <strong class="text-electric-blue">Architectural</strong> design of secure systems, <strong class="text-neon-green">Engineering</strong> and implementation of defensive platforms, and <strong class="text-neon-purple">Strategic Consulting</strong> for security initiatives.</p>`,
                 tags: ["Consultancy", "Architecture", "Engineering", "Strategy"],
                 icon: `<img src="assets/images/drc_logo_white-001.png" alt="DRC Logo" class="w-10 h-10 object-contain">`
             },
@@ -714,7 +707,12 @@
                 subtitle: "Advisory & Research",
                 body: `<p>Strategic advisory powered by deep research. <strong class="text-neon-pink">Threat Intel is more than just IOC feeds.</strong> It is simply intelligence about adversary activity in any form.</p>
                        <p>Dark Roast Cyber focuses on <strong class="text-neon-pink">Intel Requirements</strong>, automating deliverables, and identifying actionable intelligence.</p>
-                       <p>Dark Roast Cyber generates <strong class="text-neon-pink">emulation</strong> based on observed adversary activity for detection assessment, helping you anticipate threats.</p>`,
+                       <p>Dark Roast Cyber generates <strong class="text-neon-pink">emulation</strong> based on observed adversary activity for detection assessment, helping you anticipate threats.</p>
+                       <div class="mt-6">
+                           <a href="https://percolate.pages.dev" target="_blank" class="bg-neon-pink text-black font-mono text-[10px] uppercase font-bold py-2 px-4 rounded-lg hover:scale-105 transition-transform inline-block shadow-lg shadow-pink-500/20">
+                               ☕ Percolate CTI Aggregator
+                           </a>
+                       </div>`,
                 tags: ["Advisory", "Research", "CTI", "Strategy"],
                 icon: `<svg class="w-10 h-10 text-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>`
             }
