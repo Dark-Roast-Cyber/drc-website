@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark Roast Cyber | Security Consulting, Engineering & Intelligence</title>
 
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://darkroastcyber.io; connect-src 'self';">
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Dark Roast Cyber: Arizona-based boutique cybersecurity consulting by Christian Taillon. Expert vCISO services, threat intelligence, and security engineering solutions.">
     <meta name="keywords" content="Christian Taillon, Cyber Security Speaker, Dark Roast Cyber, Phoenix Arizona Cyber, Cyber Security Consulting, vCISO Services, Threat Intelligence, Security Engineering, Arizona Cyber Security, InfoSec">
@@ -42,7 +45,7 @@
             "jobTitle": "Principal Consultant",
             "url": "https://christiant.io",
             "sameAs": [
-              "https://linkedin.com/in/christian-taillon",
+              "https://www.linkedin.com/in/christiantaillon/",
               "https://github.com/christian-taillon",
               "https://openwebui.com/u/christiant"
             ]
@@ -301,7 +304,7 @@
         <section class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(200px,auto)]">
             
             <!-- 1. HERO CARD (Takes 6/12 columns = 50%) -->
-            <article class="bento-card card-yellow md:col-span-6 md:row-span-2 group" onclick="openModal('hero')" id="hero-card">
+            <article role="button" tabindex="0" class="bento-card card-yellow md:col-span-6 md:row-span-2 group" onclick="openModal('hero')" id="hero-card">
                 <div class="absolute top-6 right-6 group-hover:scale-110 transition-transform duration-300">
                     <img src="assets/images/drc_logo_white-001.png" alt="Dark Roast Cyber Logo" class="w-16 h-16 object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-2xl">
                 </div>
@@ -323,7 +326,7 @@
             </article>
 
             <!-- 2. PROFILE CARD (Takes 3/12 columns = 25%) -->
-            <article class="bento-card card-gray md:col-span-3 md:row-span-2 group p-6" onclick="openModal('profile')">
+            <article role="button" tabindex="0" class="bento-card card-gray md:col-span-3 md:row-span-2 group p-6" onclick="openModal('profile')">
                 <div class="w-full aspect-[3/5] bg-panel-gray mb-4 rounded-2xl border border-border-gray flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
                      <img src="assets/images/headshoot.JPG" alt="Christian Taillon - Principal Consultant" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
                 </div>
@@ -333,7 +336,7 @@
                          <h2 class="text-sm font-bold text-[var(--text-main)]">Christian Taillon</h2>
                     </div>
                     <div class="flex gap-2" onclick="event.stopPropagation()">
-                        <a href="https://linkedin.com/in/christian-taillon" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-colors text-center text-[10px] font-mono uppercase">LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/christiantaillon/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-colors text-center text-[10px] font-mono uppercase">LinkedIn</a>
                         <a href="https://christiant.io" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-lg border border-border-gray hover:bg-neon-yellow hover:text-black hover:border-neon-yellow transition-colors text-center text-[10px] font-mono uppercase">Blog</a>
                     </div>
                 </div>
@@ -342,7 +345,7 @@
             <!-- Wrapper for Small Cards (Takes 3/12 columns = 25%, Stacks Vertically) -->
             <div class="md:col-span-3 md:row-span-2 flex flex-col gap-4">
                 <!-- 3. OPEN SOURCE -->
-                <article class="bento-card card-blue group flex-1" onclick="openModal('opensource')">
+                <article role="button" tabindex="0" class="bento-card card-blue group flex-1" onclick="openModal('opensource')">
                     <div class="flex flex-col h-full justify-between">
                         <div>
                             <div class="flex justify-between items-start mb-2">
@@ -359,20 +362,20 @@
                 </article>
 
                 <!-- 4. PUBLIC SPEAKING -->
-                <article class="bento-card card-yellow group flex-1" onclick="openModal('speaking')">
+                <article role="button" tabindex="0" class="bento-card card-yellow group flex-1" onclick="openModal('speaking')">
                     <div class="flex flex-col h-full justify-between">
                         <div>
                             <div class="mb-2">
                                 <svg class="w-6 h-6 text-neon-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                             </div>
                             <h3 class="text-sm font-display text-[var(--text-main)] mb-1">Speaking</h3>
-                            <div class="text-[10px] text-neon-yellow mt-1 font-mono leading-tight">
-                                Upcoming Keynote:<br>
-                                10th Annual Cyber Southwest Symposium
+                            <div class="text-[10px] text-neon-yellow mt-1 font-mono leading-tight uppercase tracking-tighter">
+                                Next: Keynote Moderator<br>
+                                ElevateIT 2026
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 mt-2">
-                            <!-- Tags removed -->
+                            <span class="text-[8px] font-mono text-[var(--text-muted)] group-hover:text-neon-yellow transition-colors italic">// Open to Present</span>
                         </div>
                     </div>
                 </article>
@@ -381,7 +384,7 @@
             <!-- --- THE 3 PILLARS ROW (4 cols each = 12 total) --- -->
 
             <!-- 5. SOLUTIONS ARCHITECTURE -->
-            <article class="bento-card card-blue md:col-span-4 group" onclick="openModal('ai')">
+            <article role="button" tabindex="0" class="bento-card card-blue md:col-span-4 group" onclick="openModal('ai')">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-4">
                         <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
@@ -398,7 +401,7 @@
             </article>
 
             <!-- 6. STRATEGIC CONSULTING (New Purple) -->
-            <article class="bento-card card-purple md:col-span-4 group" onclick="openModal('consulting')">
+            <article role="button" tabindex="0" class="bento-card card-purple md:col-span-4 group" onclick="openModal('consulting')">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-4">
                         <!-- Strategy Icon -->
@@ -416,7 +419,7 @@
             </article>
 
             <!-- 7. SECURITY ENGINEERING -->
-            <article class="bento-card card-green md:col-span-4 group" onclick="openModal('engineering')">
+            <article role="button" tabindex="0" class="bento-card card-green md:col-span-4 group" onclick="openModal('engineering')">
                 <div class="flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-4">
                         <svg class="w-8 h-8 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
@@ -433,7 +436,7 @@
             </article>
 
             <!-- 8. THREAT INTELLIGENCE (Bottom Row - Full Width) -->
-            <article class="bento-card card-pink md:col-span-12 group" onclick="openModal('threatintel')">
+            <article role="button" tabindex="0" class="bento-card card-pink md:col-span-12 group" onclick="openModal('threatintel')">
                 <div class="flex flex-col md:flex-row gap-8 h-full">
                      <div class="flex-1 flex flex-col items-start">
                          <div class="flex flex-wrap items-center gap-3 mb-3">
@@ -638,8 +641,8 @@
                 theme: "gray",
                 title: "Christian Taillon",
                 subtitle: "Principal Consultant",
-                body: `<p>Christian is a security engineer and architect with a career spanning offensive security, intelligence, and software engineering.</p>
-                       <p>Currently, he is focused on the intersection of <strong class="text-electric-blue">Artificial Intelligence</strong> and <strong class="text-neon-green">Cybersecurity</strong>. He researches how to harden agentic workflows, secure self-hosted LLMs, and use AI to augment offensive security capabilities.</p>`,
+                body: `<p>Christian is a security engineer and architect with a career spanning offensive security, intelligence, and software engineering. Beyond his primary work, the intersection of <strong class="text-electric-blue">Artificial Intelligence</strong> and <strong class="text-neon-green">Cybersecurity</strong> is a dedicated side interest and hobby.</p>
+                       <p>Christian advocates for <strong class="text-neon-yellow">cybersecurity fundamentals</strong> while architecting tactical responses to evasive threats. He specializes in threat-informed security investment, focusing on practical defenses against persistent techniques without the overhead of over-engineered intelligence platforms. He bridges the gap between basic hygiene and advanced response.</p>`,
                 tags: ["Principal", "Architect", "Engineer", "Speaker"],
                 icon: `<svg class="w-10 h-10 text-[var(--text-main)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.2-2.858.59-4.18M5.5 19.5c.323-2.924 1.4-5.612 3-7.928M16.25 20c.964-1.576 1.75-3.318 2.222-5.166m-1.222-7.834a9 9 0 00-10.5 0"></path></svg>`
             },
@@ -654,17 +657,23 @@
             },
             speaking: {
                 theme: "yellow",
-                title: "Public Speaking",
-                subtitle: "Advisory & Education",
-                body: `<p>Speaking Monthly & Quarterly Threat Briefs. Dozens of various 1hr topics on Information Security, Threats, Defense Evasion and Detection Engineering.</p>
-                       <p><strong>Upcoming Keynote:</strong><br>10th Annual Cyber Southwest Symposium<br>Dec 4, 2025 | UA Tech Park Event Center, Tucson, AZ</p>`,
+                title: "Public Speaking & Advisory",
+                subtitle: "Education & Briefs",
+                body: `<p>I present multiple times a month on research, trends, custom tools/solutions, and threats. I am a regular guest speaker for Arizona Universities and community workshops on security, coding, AI topics, and Linux.</p>
+                       <p>I frequently present to the <strong class="text-neon-yellow">ISSA Phoenix Chapter</strong>, chair the monthly <strong class="text-neon-yellow">Threat Meeting & Exchange</strong>, and serve as a presenter for <strong class="text-neon-yellow">ACTRA's Fellowship Academy</strong>.</p>
+                       <div class="mt-4 p-4 border border-neon-yellow/20 rounded-xl bg-neon-yellow/5">
+                           <p class="text-neon-yellow font-bold mb-1">Upcoming Engagement:</p>
+                           <p><strong>Keynote Panel Moderator: ElevateIT 2026</strong><br>Leading Through the Unknown: CyberSecurity Strategy in a Quantum-Ready World</p>
+                       </div>
+                       <p class="mt-4 text-xs italic text-[var(--text-muted)]">Currently open to new speaking engagements and guest lectures.</p>`,
                 speakingTopics: [
+                    "Previous Public Events & Presentations:",
+                    "Keynote: 10th Annual Cyber Southwest Symposium (2025)",
                     "Closing Keynote - CyberShare 2026, Scottsdale",
-                    "CactusCon 11 Can Ducks Teach Us How to Share: What Hunting Qakbot and Other Threats Teach Us About CTI",
-                    "CactusCon 12 Threat Hunting: Becoming the Predator and No Longer the Prey",
-                    "CactusCon 13 CISO Village Workshop Presenter",
-                    "CactusCon 14 DIY AI: Build Your Own Digitial InfoSec Team with BYOLLM",
-                    "ISSA Phoenix Chapter Quarterly Meeting (Q4 2025)"
+                    "CactusCon 11 - Can Ducks Teach Us How to Share: What Hunting Qakbot and Other Threats Teach Us About CTI",
+                    "CactusCon 12 - Threat Hunting: Becoming the Predator and No Longer the Prey",
+                    "CactusCon 13 - CISO Village Workshop Presenter",
+                    "CactusCon 14 - DIY AI: Build Your Own Digital InfoSec Team with BYOLLM"
                 ],
                 tags: ["TALKS", "Workshops", "Keynotes", "Briefs"],
                 icon: `<svg class="w-10 h-10 text-neon-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>`
@@ -806,8 +815,14 @@
                 modalList.classList.remove('hidden');
                 data.speakingTopics.forEach(topic => {
                     const li = document.createElement('li');
-                    li.className = 'flex items-start gap-2';
-                    li.innerHTML = `<span class="text-neon-yellow mt-1">➜</span> <span>${topic}</span>`;
+                    // If the item ends in a colon, treat it as a header (no icon, different style)
+                    if (topic.endsWith(':')) {
+                        li.className = 'mt-4 mb-2 text-neon-yellow font-bold uppercase tracking-wider text-[10px]';
+                        li.innerHTML = `<span>${topic}</span>`;
+                    } else {
+                        li.className = 'flex items-start gap-2';
+                        li.innerHTML = `<span class="text-neon-yellow mt-1">➜</span> <span>${topic}</span>`;
+                    }
                     modalList.appendChild(li);
                 });
             } else {
@@ -835,6 +850,17 @@
                 typingSessionId++; 
             }
         }
+
+        // Accessibility: Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const target = e.target.closest('.bento-card');
+                if (target && document.activeElement === target) {
+                    e.preventDefault();
+                    target.click();
+                }
+            }
+        });
     </script>
 </body>
 </html>
