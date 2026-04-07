@@ -91,7 +91,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -105,6 +105,7 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
+                        accent: ['Doto', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
@@ -278,6 +279,14 @@
             border-color: var(--text-main);
             color: var(--text-main);
         }
+
+        /* Doto Accent Font - for brand identity and emphasis */
+        .doto-accent {
+            font-family: "Doto", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            font-variation-settings: "ROND" 0;
+        }
     </style>
 </head>
 <body class="font-sans antialiased relative min-h-screen flex flex-col items-center p-4 md:p-8 lg:p-12 transition-colors duration-300">
@@ -294,11 +303,11 @@
                 <p class="font-mono text-xs tracking-[0.2em] text-neon-yellow uppercase mb-2">
                     EST. SPRING 2025
                 </p>
-                <div class="font-display font-bold text-xl tracking-tight text-[var(--text-main)]">Dark Roast Cyber</div>
+                <div class="font-accent font-bold text-xl tracking-tight text-[var(--text-main)]" style="font-weight: 600;">Dark Roast Cyber</div>
             </div>
             
             <div class="flex items-center gap-6">
-                <nav class="hidden md:flex font-mono text-xs text-gray-500 items-center gap-6">
+                <nav class="hidden md:flex font-accent text-xs text-gray-500 items-center gap-6" style="font-weight: 400;">
                     <button onclick="openModal('ai')" class="hover:text-electric-blue transition-colors cursor-pointer uppercase">Architectural</button>
                     <span class="text-gray-800">/</span>
                     <button onclick="openModal('consulting')" class="hover:text-neon-purple transition-colors cursor-pointer uppercase">Consulting</button>
@@ -333,7 +342,7 @@
                 </div>
                 <div class="mt-8 w-full flex flex-col md:flex-row justify-between items-end gap-4">
                     <div class="max-w-md">
-                        <p class="font-mono text-[10px] text-neon-yellow uppercase tracking-widest mb-2">// Mission Profile</p>
+                        <p class="font-accent text-[10px] text-neon-yellow uppercase tracking-widest mb-2" style="font-weight: 500;">// Mission Profile</p>
                         <p class="font-sans text-sm text-[var(--text-muted)] leading-relaxed min-h-[40px]">Architectural. Engineering. Consulting.</p>
                     </div>
                 </div>
@@ -365,7 +374,7 @@
                             <div class="flex justify-between items-start mb-2">
                                 <svg class="w-6 h-6 text-electric-blue" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
                             </div>
-                            <h3 class="text-sm font-display text-[var(--text-main)] mb-1">Open Source</h3>
+                            <h3 class="text-sm font-accent text-[var(--text-main)] mb-1" style="font-weight: 600;">Open Source</h3>
                             <p class="text-[10px] text-[var(--text-muted)] mt-1 leading-tight">Building public goods & community tools.</p>
                         </div>
                         <div class="flex gap-2 mt-2" onclick="event.stopPropagation()">
@@ -382,7 +391,7 @@
                             <div class="mb-2">
                                 <svg class="w-6 h-6 text-neon-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                             </div>
-                            <h3 class="text-sm font-display text-[var(--text-main)] mb-1">Speaking</h3>
+                            <h3 class="text-sm font-accent text-[var(--text-main)] mb-1" style="font-weight: 600;">Speaking</h3>
                             <div class="text-[10px] text-neon-yellow mt-1 font-mono leading-tight uppercase tracking-tighter">
                                 Next: Keynote Moderator<br>
                                 ElevateIT 2026
@@ -402,7 +411,7 @@
                 <div class="flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-4">
                         <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        <h3 class="font-display text-xl text-[var(--text-main)] group-hover:text-electric-blue transition-colors">Solutions Architecture</h3>
+                        <h3 class="font-accent text-xl text-[var(--text-main)] group-hover:text-electric-blue transition-colors" style="font-weight: 600;">Solutions Architecture</h3>
                     </div>
                     <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-6 flex-grow">
                         Basic security controls, SIEM, and automation. <span class="group-hover:text-[var(--text-main)] transition-colors">Self-hosted or Enterprise</span>.
@@ -420,7 +429,7 @@
                     <div class="flex items-center gap-3 mb-4">
                         <!-- Strategy Icon -->
                         <svg class="w-8 h-8 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                        <h3 class="font-display text-xl text-[var(--text-main)] group-hover:text-neon-purple transition-colors">Strategic Consulting</h3>
+                        <h3 class="font-accent text-xl text-[var(--text-main)] group-hover:text-neon-purple transition-colors" style="font-weight: 600;">Strategic Consulting</h3>
                     </div>
                     <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-6 flex-grow">
                         Leadership and program development. <span class="group-hover:text-[var(--text-main)] transition-colors">vCISO services</span> and maturity assessments.
@@ -437,7 +446,7 @@
                 <div class="flex flex-col h-full">
                     <div class="flex items-center gap-3 mb-4">
                         <svg class="w-8 h-8 text-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        <h3 class="font-display text-xl text-[var(--text-main)] group-hover:text-neon-green transition-colors">Security Engineering</h3>
+                        <h3 class="font-accent text-xl text-[var(--text-main)] group-hover:text-neon-green transition-colors" style="font-weight: 600;">Security Engineering</h3>
                     </div>
                     <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-6 flex-grow">
                         Hardening, <span class="group-hover:text-[var(--text-main)] transition-colors">Vulnerability Mgmt</span>, and EDR implementation.
@@ -455,7 +464,7 @@
                      <div class="flex-1 flex flex-col items-start">
                          <div class="flex flex-wrap items-center gap-3 mb-3">
                              <svg class="w-8 h-8 text-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                             <h3 class="font-display text-xl md:text-2xl text-[var(--text-main)] group-hover:text-neon-pink transition-colors">Cyber Threat Intelligence</h3>
+                             <h3 class="font-accent text-xl md:text-2xl text-[var(--text-main)] group-hover:text-neon-pink transition-colors" style="font-weight: 600;">Cyber Threat Intelligence</h3>
                              <a href="https://brewedintel.io/" target="_blank" onclick="event.stopPropagation()" class="bg-neon-pink text-black font-mono text-[10px] uppercase font-bold py-2 px-4 rounded-lg hover:scale-105 transition-transform inline-block shadow-lg shadow-pink-500/20 whitespace-nowrap">☕ Percolate CTI Aggregator</a>
                         </div>
                         <p class="text-[var(--text-muted)] text-sm leading-relaxed flex-grow">
@@ -528,7 +537,7 @@
                 <div id="modal-icon" class="text-2xl pt-1"></div>
                 <div>
                     <!-- DECRYPT EFFECT TARGET -->
-                    <h3 id="modal-title" class="font-display text-2xl font-bold text-[var(--text-main)]"></h3>
+                    <h3 id="modal-title" class="font-accent text-2xl font-bold text-[var(--text-main)]" style="font-weight: 700;"></h3>
                     <div id="modal-subtitle" class="text-xs font-mono uppercase tracking-widest mt-1 text-[var(--text-muted)]"></div>
                 </div>
             </div>
