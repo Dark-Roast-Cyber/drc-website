@@ -738,9 +738,9 @@
                 theme: "gray",
                 title: "Christian Taillon",
                 subtitle: "Principal Consultant",
-                body: `<p>Christian leads consulting services at a business service provider company and serves as Director of Threat Intelligence at a cyber intelligence company. His career spans offensive security, threat intelligence, security engineering, and software engineering.</p>
+                body: `<p>Christian leads cybersecurity consulting services at a business service provider company and serves as Director of Threat Intelligence at a cyber intelligence company. His career spans offensive security, threat intelligence, security engineering, and software engineering.</p>
                        <p>While he leads teams and programs, he stays close to the work: building detections, researching adversary behavior, improving triage, and helping teams respond more effectively. He focuses on practical security operations, cybersecurity fundamentals, and reducing complexity where it does not improve outcomes.</p>
-                       <p>Beyond his primary work, Christian maintains public Github projects and technical guides exploring the intersection of <strong class="text-electric-blue">Artificial Intelligence</strong> and <strong class="text-neon-green">Cybersecurity</strong>, with a focus on practical experimentation rather than hype.</p>`,
+                       <p>Beyond his primary work, Christian maintains public GitHub projects and technical guides tied to public and virtual presentations, trainings, cheatsheets, detection and hunting guidance, and resources for securely hosting or leveraging <strong class="text-electric-blue">LLM inference</strong> in cybersecurity workflows.</p>`,
                 tags: ["Principal", "Detection", "Engineer", "Speaker"],
                 icon: `<svg class="w-10 h-10 text-[var(--text-main)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.2-2.858.59-4.18M5.5 19.5c.323-2.924 1.4-5.612 3-7.928M16.25 20c.964-1.576 1.75-3.318 2.222-5.166m-1.222-7.834a9 9 0 00-10.5 0"></path></svg>`
             },
@@ -748,8 +748,9 @@
                 theme: "blue",
                 title: "Open Source & Sponsorship",
                 subtitle: "Building Public Goods",
-                body: `<p>Dark Roast Cyber maintains and contributes to Open Source tools often supporting cybersecurity and AI communities.</p>
-                       <p>Check out my <a href="https://github.com/christian-taillon" target="_blank" class="text-electric-blue hover:underline">Github</a> and <a href="https://openwebui.com/u/christiant" target="_blank" class="text-electric-blue hover:underline">OpenWebUI</a> profiles.</p>`,
+                body: `<p>Dark Roast Cyber maintains and contributes to open source tools, guides, and reference material supporting cybersecurity, security operations, detection engineering, and AI experimentation.</p>
+                       <p>Public work includes repositories tied to presentations and trainings, cheatsheets, detection and hunting guidance, automation examples, and resources for securely hosting or leveraging LLM inference in cybersecurity workflows.</p>
+                       <p>Browse the <a href="https://github.com/christian-taillon?tab=repositories" target="_blank" class="text-electric-blue hover:underline">GitHub repositories</a> and <a href="https://openwebui.com/u/christiant" target="_blank" class="text-electric-blue hover:underline">OpenWebUI</a> profile.</p>`,
                 tags: ["GitHub Sponsor", "Community", "Tooling"],
                 icon: `<svg class="w-10 h-10 text-electric-blue" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>`
             },
@@ -854,6 +855,50 @@
             }, 20);
         }
 
+        function highlightServiceTerms(htmlString) {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlString;
+            const termPattern = /\b(detection engineering|detect(?:ion|ions|ing)?|detections?|advise(?:s|d)?|advisory|engineer(?:s|ed|ing)?|intel|intelligence)\b/gi;
+            const getTermClass = (term) => {
+                const lowerTerm = term.toLowerCase();
+                if (lowerTerm === 'detection engineering') return 'text-electric-blue';
+                if (lowerTerm.startsWith('detect')) return 'text-electric-blue';
+                if (lowerTerm.startsWith('advis')) return 'text-neon-purple';
+                if (lowerTerm.startsWith('engineer')) return 'text-neon-green';
+                return 'text-neon-pink';
+            };
+            const walker = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT);
+            const textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+            textNodes.forEach(node => {
+                if (node.parentElement.closest('a, strong, .service-term-highlight')) return;
+                const text = node.textContent;
+                if (!termPattern.test(text)) return;
+                termPattern.lastIndex = 0;
+
+                const fragment = document.createDocumentFragment();
+                let lastIndex = 0;
+                text.replace(termPattern, (match, _term, offset) => {
+                    if (offset > lastIndex) {
+                        fragment.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+                    }
+                    const strong = document.createElement('strong');
+                    strong.className = `${getTermClass(match)} service-term-highlight`;
+                    strong.textContent = match;
+                    fragment.appendChild(strong);
+                    lastIndex = offset + match.length;
+                    return match;
+                });
+                if (lastIndex < text.length) {
+                    fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+                }
+                node.parentNode.replaceChild(fragment, node);
+            });
+
+            return tempDiv.innerHTML;
+        }
+
         let typingSessionId = 0; 
         function typeHTML(container, htmlString, speed = 7) {
             container.innerHTML = '';
@@ -909,7 +954,7 @@
             document.getElementById('modal-subtitle').textContent = data.subtitle;
             
             const modalBody = document.getElementById('modal-body');
-            typeHTML(modalBody, data.body);
+            typeHTML(modalBody, highlightServiceTerms(data.body));
             
             const modalList = document.getElementById('modal-list');
             modalList.innerHTML = '';
