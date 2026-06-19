@@ -578,7 +578,7 @@
 
     <!-- Modal Overlay -->
     <div id="info-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden" onclick="closeModal(event)">
-        <div id="modal-content" class="bg-[var(--card-bg-hover)] border border-[var(--card-border)] rounded-3xl w-full max-w-2xl p-8 relative shadow-2xl" onclick="event.stopPropagation()">
+        <div id="modal-content" class="bg-[var(--card-bg-hover)] border border-[var(--card-border)] rounded-3xl w-full max-w-2xl max-h-[calc(100dvh-2rem)] overflow-y-auto p-5 md:p-8 relative shadow-2xl" onclick="event.stopPropagation()">
             <button onclick="closeModal(event)" class="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors">
                 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
