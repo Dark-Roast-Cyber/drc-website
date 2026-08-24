@@ -241,6 +241,11 @@
             --color-yellow: #ffff00;
             --color-green: #00ff00;
             --color-purple: #bf00ff; /* Electric Purple */
+
+            /* --- ELEVATION SHADOWS (Dark Mode) --- */
+            --shadow: 0 1px 2px rgba(0, 0, 0, 0.28), 0 14px 32px rgba(0, 0, 0, 0.28);
+            --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.32), 0 20px 40px rgba(0, 0, 0, 0.38);
+            --shadow-badge: 0 -1px 1px rgba(255, 255, 255, 0.18), 0 8px 16px rgba(0, 0, 0, 0.46);
         }
 
         /* --- LIGHT MODE OVERRIDES --- */
@@ -256,6 +261,11 @@
             --color-pink: #db2777;   
             --color-green: #16a34a; 
             --color-purple: #9333ea; /* Readable Purple */
+
+            /* --- ELEVATION SHADOWS (Light Mode) --- */
+            --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 28px rgba(15, 23, 42, 0.07);
+            --shadow-hover: 0 2px 4px rgba(15, 23, 42, 0.05), 0 18px 36px rgba(15, 23, 42, 0.10);
+            --shadow-badge: 0 -1px 1px rgba(255, 255, 255, 0.35), 0 7px 14px rgba(15, 23, 42, 0.28);
         }
 
         body {
@@ -293,32 +303,33 @@
             position: relative;
             overflow: hidden;
             z-index: 10;
+            box-shadow: var(--shadow);
         }
 
         .bento-card:hover { 
             transform: scale(1.02); 
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-hover);
         }
 
         /* Specific Color Cards */
         .card-yellow { border-color: var(--card-border); }
-        .card-yellow:hover { border-color: var(--color-yellow); box-shadow: 0 0 30px -5px var(--color-yellow); }
+        .card-yellow:hover { border-color: var(--color-yellow); box-shadow: var(--shadow-hover); }
         
         .card-blue { border-color: var(--card-border); }
-        .card-blue:hover { border-color: var(--color-blue); box-shadow: 0 0 30px -5px var(--color-blue); }
+        .card-blue:hover { border-color: var(--color-blue); box-shadow: var(--shadow-hover); }
 
         .card-green { border-color: var(--card-border); }
-        .card-green:hover { border-color: var(--color-green); box-shadow: 0 0 30px -5px var(--color-green); }
+        .card-green:hover { border-color: var(--color-green); box-shadow: var(--shadow-hover); }
 
         .card-pink { border-color: var(--card-border); }
-        .card-pink:hover { border-color: var(--color-pink); box-shadow: 0 0 30px -5px var(--color-pink); }
+        .card-pink:hover { border-color: var(--color-pink); box-shadow: var(--shadow-hover); }
         
         .card-purple { border-color: var(--card-border); }
-        .card-purple:hover { border-color: var(--color-purple); box-shadow: 0 0 30px -5px var(--color-purple); }
+        .card-purple:hover { border-color: var(--color-purple); box-shadow: var(--shadow-hover); }
 
         /* Gray/Profile Card */
         .card-gray { border-color: var(--card-border); }
-        .card-gray:hover { border-color: var(--text-muted); box-shadow: 0 0 30px -5px rgba(128, 128, 128, 0.1); }
+        .card-gray:hover { border-color: var(--text-muted); box-shadow: var(--shadow-hover); }
 
         /* Tag Pills */
         .tag-pill {
@@ -375,10 +386,12 @@
             border-radius: 9999px;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: var(--shadow-badge);
         }
         .theme-toggle-btn:hover {
             border-color: var(--text-main);
             color: var(--text-main);
+            box-shadow: var(--shadow-hover);
         }
 
         /* Doto Accent Font - for brand identity and emphasis */
