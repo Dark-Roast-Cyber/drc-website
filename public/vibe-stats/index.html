@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Stats | Dark Roast Cyber</title>
+<meta name="description" content="Developer telemetry: GitHub contributions, editor and terminal habits, language mix, AI usage, work rhythms, and model spend.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['Space Grotesk','sans-serif'],accent:['Doto','sans-serif'],mono:['JetBrains Mono','monospace']},colors:{'neon-pink':'var(--color-pink)','electric-blue':'var(--color-blue)','neon-yellow':'var(--color-yellow)','neon-green':'var(--color-green)','neon-purple':'var(--color-purple)','panel-gray':'#121212','border-gray':'#262626'}}}};</script>
+<style>
+:root{--bg-color:#000;--text-main:#fff;--text-muted:#9ca3af;--card-border:rgba(255,255,255,.1);--card-bg-hover:#0a0a0a;--color-pink:#ff1493;--color-blue:#00bfff;--color-yellow:#ffff00;--color-green:#00ff00;--color-purple:#bf00ff;--shadow:0 1px 2px rgba(0,0,0,.28),0 14px 32px rgba(0,0,0,.28);--shadow-hover:0 2px 4px rgba(0,0,0,.32),0 20px 40px rgba(0,0,0,.38);--shadow-badge:0 -1px 1px rgba(255,255,255,.18),0 8px 16px rgba(0,0,0,.46);--gh0:#151b23;--gh1:#033a16;--gh2:#196c2e;--gh3:#2ea043;--gh4:#56d364}
+html.light{--bg-color:#f3f4f6;--text-main:#111827;--text-muted:#4b5563;--card-border:#262626;--card-bg-hover:#fff;--color-yellow:#ea580c;--color-blue:#0284c7;--color-pink:#db2777;--color-green:#16a34a;--color-purple:#9333ea;--shadow:0 1px 2px rgba(15,23,42,.04),0 12px 28px rgba(15,23,42,.07);--shadow-hover:0 2px 4px rgba(15,23,42,.05),0 18px 36px rgba(15,23,42,.1);--shadow-badge:0 -1px 1px rgba(255,255,255,.35),0 7px 14px rgba(15,23,42,.28);--gh0:#e5e7eb;--gh1:#b7e4c7;--gh2:#74c69d;--gh3:#40916c;--gh4:#1b4332}
+body{background:var(--bg-color);color:var(--text-main);overflow-x:hidden;transition:background-color .3s,color .3s}
+#particle-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.bento-card{background:transparent;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);border:1px solid var(--card-border);border-radius:1.5rem;padding:2rem;display:flex;flex-direction:column;justify-content:space-between;transition:all .4s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden;z-index:10;box-shadow:var(--shadow)}
+.bento-card:hover{transform:scale(1.012);box-shadow:var(--shadow-hover)}
+.card-yellow:hover{border-color:var(--color-yellow)}.card-blue:hover{border-color:var(--color-blue)}.card-green:hover{border-color:var(--color-green)}.card-pink:hover{border-color:var(--color-pink)}.card-purple:hover{border-color:var(--color-purple)}.card-gray:hover{border-color:var(--text-muted)}
+.pill-custom{padding:.25rem .75rem;border:1px solid transparent;border-radius:9999px;font-size:.625rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;font-weight:600;white-space:nowrap}
+.pill-yellow{color:var(--color-yellow);border-color:var(--color-yellow);background:rgba(255,255,0,.05)}.pill-blue{color:var(--color-blue);border-color:var(--color-blue);background:rgba(0,191,255,.05)}.pill-green{color:var(--color-green);border-color:var(--color-green);background:rgba(0,255,0,.05)}.pill-pink{color:var(--color-pink);border-color:var(--color-pink);background:rgba(255,20,147,.05)}.pill-purple{color:var(--color-purple);border-color:var(--color-purple);background:rgba(191,0,255,.05)}.pill-gray{color:var(--text-muted);border-color:var(--card-border);background:rgba(128,128,128,.05)}
+.theme-toggle-btn{background:transparent;border:1px solid var(--card-border);color:var(--text-muted);padding:.5rem;border-radius:9999px;cursor:pointer;transition:all .3s;box-shadow:var(--shadow-badge)}.theme-toggle-btn:hover{border-color:var(--text-main);color:var(--text-main);box-shadow:var(--shadow-hover)}
+.metric-value{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,3.6rem);font-weight:700;letter-spacing:-.05em;line-height:.95}.submetric{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:650;letter-spacing:-.03em}.metric-label{font-family:'JetBrains Mono',monospace;font-size:.625rem;text-transform:uppercase;letter-spacing:.14em;color:var(--text-muted);margin-top:.4rem}
+.bar-row{margin:.8rem 0}.bar-label{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-muted);margin-bottom:.35rem}.bar-track{height:.48rem;border-radius:999px;background:rgba(128,128,128,.15);overflow:hidden}.bar-fill{height:100%;border-radius:999px}.bg-blue{background:var(--color-blue)}.bg-pink{background:var(--color-pink)}.bg-green{background:var(--color-green)}.bg-purple{background:var(--color-purple)}.bg-yellow{background:var(--color-yellow)}
+.stack-track{height:.7rem;border-radius:999px;overflow:hidden;display:flex;background:rgba(128,128,128,.15)}.stack-segment{height:100%}.after-weekend{background:var(--color-pink)}.after-weekday{background:var(--color-yellow)}.after-daytime{background:rgba(128,128,128,.2)}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:.72rem}th{text-align:left;color:var(--text-muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em;padding:.75rem .6rem;border-bottom:1px solid var(--card-border)}td{padding:.7rem .6rem;border-bottom:1px solid rgba(128,128,128,.12)}tr:last-child td{border-bottom:0}.rank{color:var(--text-muted);width:3rem}.model-name{color:var(--text-main);font-weight:500}.sort-btn{display:inline-flex;align-items:center;gap:.35rem;color:inherit;text-transform:inherit;letter-spacing:inherit;background:transparent;border:0;padding:0;cursor:pointer;font:inherit;white-space:nowrap}.sort-btn:hover,.sort-btn.active{color:var(--color-green)}.sort-arrow{display:inline-block;min-width:.65rem;color:var(--text-muted)}.sort-btn.active .sort-arrow{color:var(--color-green)}
+.heatmap-scroller{overflow-x:auto;padding-bottom:.3rem}.heatmap-inner{min-width:790px}.month-grid{display:grid;grid-template-columns:repeat(53,1fr);gap:4px;margin-left:34px;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted)}.heatmap-body{display:grid;grid-template-columns:28px 1fr;gap:6px;align-items:start}.day-labels{height:94px;display:grid;grid-template-rows:repeat(7,10px);gap:4px;font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--text-muted);align-items:center}.contrib-grid{display:grid;grid-template-columns:repeat(53,10px);grid-template-rows:repeat(7,10px);grid-auto-flow:row;gap:4px}.contrib-cell{width:10px;height:10px;border-radius:2px}.gh-empty{background:transparent}.gh-0{background:var(--gh0)}.gh-1{background:var(--gh1)}.gh-2{background:var(--gh2)}.gh-3{background:var(--gh3)}.gh-4{background:var(--gh4)}
+.legend-cell{display:inline-block;width:10px;height:10px;border-radius:2px}.lang-strip{height:12px;border-radius:999px;overflow:hidden;display:flex;background:rgba(128,128,128,.12)}.lang-strip span{height:100%}.tiny-stat{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-muted)}
+a.profile-link{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);transition:color .2s}a.profile-link:hover{color:var(--color-blue)}
+::selection{background:var(--color-yellow);color:#000}
+</style>
+</head>
+<body class="font-sans antialiased relative min-h-screen p-4 md:p-8 lg:p-12">
+<canvas id="particle-canvas"></canvas>
+<main class="relative z-10 w-full max-w-7xl mx-auto pb-20">
+<header class="flex justify-between items-end mb-8 border-b border-border-gray pb-4 px-2">
+<div><p class="font-mono text-xs tracking-[0.2em] text-neon-yellow uppercase mb-2">// Vibe Stats · 2026 YTD</p><div class="font-accent font-bold text-xl tracking-tight">Dark Roast Cyber</div></div>
+<div class="flex items-center gap-4"><a href="https://github.com/christian-taillon" target="_blank" rel="noopener noreferrer" class="profile-link">GitHub</a><a href="/" class="profile-link">Home</a><button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+<svg id="icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+<svg id="icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+</button></div>
+</header>
+
+<section class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(180px,auto)]">
+<article class="bento-card card-yellow md:col-span-7 md:row-span-2 group">
+<div><span class="pill-custom pill-yellow">Developer telemetry</span><h1 class="font-display text-5xl md:text-7xl font-bold tracking-tighter leading-[.9] mt-6">VIBE<br><span class="text-neon-yellow font-normal italic">STATS</span></h1><p class="text-sm text-[var(--text-muted)] mt-5 max-w-xl">Code, terminals, commits, models, and the rhythm behind the work.</p></div>
+<div class="mt-10 grid grid-cols-2 md:grid-cols-3 gap-6"><div><div class="metric-value">3,904</div><div class="metric-label">GitHub contributions</div></div><div><div class="metric-value">9.43B</div><div class="metric-label">AI tokens</div></div><div><div class="metric-value">1,993</div><div class="metric-label">Tracked AI hours</div></div></div>
+</article>
+
+<article class="bento-card card-green md:col-span-5">
+<div><div class="flex items-start justify-between gap-3"><div><div class="font-accent text-xl font-semibold mb-1">AI throughput</div><p class="text-sm text-[var(--text-muted)]">Across tracked AI-assisted coding activity.</p></div><span class="pill-custom pill-green">$4.76K total</span></div></div>
+<div class="grid grid-cols-3 gap-4 mt-8"><div><div class="submetric">4.73M</div><div class="metric-label">Tokens / hour</div></div><div><div class="submetric">$2.39</div><div class="metric-label">Cost / hour</div></div><div><div class="submetric">$0.50</div><div class="metric-label">Cost / 1M</div></div></div>
+</article>
+
+<article class="bento-card card-purple md:col-span-5">
+<div><div class="font-accent text-xl font-semibold mb-1">Peak AI hour</div><p class="text-sm text-[var(--text-muted)]">The busiest single tracked hour.</p></div>
+<div class="mt-6"><div class="metric-value text-neon-purple">16:00</div><div class="metric-label">16:00–16:59 · 510.8M tokens · $279.58</div></div>
+</article>
+
+<article class="bento-card card-green md:col-span-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-7"><div><span class="pill-custom pill-green">GitHub · 2026</span><h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mt-4">3,904 contributions</h2><p class="text-sm text-[var(--text-muted)] mt-2">Activity across 44 repositories.</p></div><div class="grid grid-cols-3 gap-6 md:text-right"><div><div class="submetric">99%</div><div class="metric-label">Commits</div></div><div><div class="submetric">1%</div><div class="metric-label">Pull requests</div></div><div><div class="submetric">44</div><div class="metric-label">Repositories</div></div></div></div>
+<div class="heatmap-scroller" aria-label="GitHub contribution activity for 2026"><div class="heatmap-inner"><div id="month-grid" class="month-grid"></div><div class="heatmap-body"><div class="day-labels"><span></span><span>Mon</span><span></span><span>Wed</span><span></span><span>Fri</span><span></span></div><div id="contrib-grid" class="contrib-grid" aria-hidden="true"></div></div></div></div>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-6"><a class="profile-link" href="https://github.com/christian-taillon?tab=overview&from=2026-08-01&to=2026-08-28" target="_blank" rel="noopener noreferrer">@christian-taillon ↗</a><div class="flex items-center gap-1.5 tiny-stat"><span>Less</span><span class="legend-cell gh-0"></span><span class="legend-cell gh-1"></span><span class="legend-cell gh-2"></span><span class="legend-cell gh-3"></span><span class="legend-cell gh-4"></span><span>More</span></div></div>
+</article>
+
+<article class="bento-card card-blue md:col-span-6">
+<div class="flex items-start justify-between gap-4"><div><span class="pill-custom pill-blue">WakaTime · 1 year</span><h2 class="font-display text-3xl font-bold tracking-tight mt-4">Where the code happens</h2></div><span class="font-mono text-[10px] text-[var(--text-muted)]">EDITOR + AGENT HARNESS</span></div>
+<div class="mt-6"><div class="tiny-stat uppercase tracking-widest mb-2">Editor</div><div class="bar-row"><div class="bar-label"><span>Neovim</span><span>98%</span></div><div class="bar-track"><div class="bar-fill bg-blue" style="width:98%"></div></div></div><div class="bar-row"><div class="bar-label"><span>VS Codium</span><span>2%</span></div><div class="bar-track"><div class="bar-fill bg-purple" style="width:2%;min-width:4px"></div></div></div><div class="tiny-stat uppercase tracking-widest mt-6 mb-2">Agent Harness Interface</div><div class="bar-row"><div class="bar-label"><span>Terminal</span><span>96%</span></div><div class="bar-track"><div class="bar-fill bg-green" style="width:96%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Desktop App</span><span>4%</span></div><div class="bar-track"><div class="bar-fill bg-pink" style="width:4%;min-width:4px"></div></div></div></div>
+</article>
+
+<article class="bento-card card-yellow md:col-span-6">
+<div><span class="pill-custom pill-yellow">2021–2026 YTD</span><h2 class="font-display text-3xl font-bold tracking-tight mt-4">Language share</h2><p class="text-sm text-[var(--text-muted)] mt-2">Estimated share across all LOC added.</p></div>
+<div class="mt-7"><div class="lang-strip" aria-label="Rust 59%, Python 15%, MDX 13%, HTML 12%, Other 1%"><span style="width:59%;background:var(--color-yellow)"></span><span style="width:15%;background:var(--color-blue)"></span><span style="width:13%;background:var(--color-purple)"></span><span style="width:12%;background:var(--color-pink)"></span><span style="width:1%;background:var(--color-green)"></span></div><div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mt-6"><div><div class="submetric">59%</div><div class="metric-label">Rust</div></div><div><div class="submetric">15%</div><div class="metric-label">Python</div></div><div><div class="submetric">13%</div><div class="metric-label">MDX</div></div><div><div class="submetric">12%</div><div class="metric-label">HTML</div></div><div><div class="submetric">1%</div><div class="metric-label">Other</div></div></div></div>
+</article>
+
+<article class="bento-card card-yellow md:col-span-12 group">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-5"><div><span class="pill-custom pill-yellow">After hours</span><h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mt-4">68% of coding happens after hours</h2><p class="text-sm text-[var(--text-muted)] mt-2">Weekends or weekdays from 4 PM onward.</p></div><div class="metric-value text-neon-yellow">67.9%</div></div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8"><div><div class="submetric text-neon-pink">25.6%</div><div class="metric-label">Weekend activity</div></div><div><div class="submetric text-neon-yellow">42.3%</div><div class="metric-label">Weekdays after 4 PM</div></div><div><div class="submetric">32.1%</div><div class="metric-label">Weekday daytime</div></div></div>
+<div class="mt-7"><div class="stack-track" aria-label="After-hours activity: 25.6 percent weekend, 42.3 percent weekdays after 4 PM, 32.1 percent weekday daytime"><div class="stack-segment after-weekend" style="width:25.6%" title="Weekend activity: 25.6%"></div><div class="stack-segment after-weekday" style="width:42.3%" title="Weekdays after 4 PM: 42.3%"></div><div class="stack-segment after-daytime" style="width:32.1%" title="Weekday daytime: 32.1%"></div></div><div class="flex flex-wrap gap-x-5 gap-y-2 mt-3 tiny-stat"><span><span class="inline-block w-2 h-2 rounded-full after-weekend mr-2"></span>Weekend</span><span><span class="inline-block w-2 h-2 rounded-full after-weekday mr-2"></span>Weekdays after 4 PM</span><span><span class="inline-block w-2 h-2 rounded-full after-daytime mr-2"></span>Weekday daytime</span></div></div>
+</article>
+
+<article class="bento-card card-blue md:col-span-6">
+<div class="flex justify-between gap-4 items-start"><div><div class="font-accent text-xl font-semibold">When the coding happens</div><p class="text-xs text-[var(--text-muted)] mt-1">Daytime leads, but the terminal never really sleeps.</p></div><span class="pill-custom pill-blue">Hourly</span></div>
+<div class="mt-6"><div class="bar-row"><div class="bar-label"><span>Morning</span><span>18.2%</span></div><div class="bar-track"><div class="bar-fill bg-blue" style="width:58.65%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Daytime</span><span>31.0%</span></div><div class="bar-track"><div class="bar-fill bg-blue" style="width:100%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Evening</span><span>28.0%</span></div><div class="bar-track"><div class="bar-fill bg-blue" style="width:90.3%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Night</span><span>22.7%</span></div><div class="bar-track"><div class="bar-fill bg-blue" style="width:73.24%"></div></div></div></div>
+</article>
+
+<article class="bento-card card-pink md:col-span-6">
+<div class="flex justify-between gap-4 items-start"><div><div class="font-accent text-xl font-semibold">Most productive days</div><p class="text-xs text-[var(--text-muted)] mt-1">Monday wins. Thursday is apparently for meetings.</p></div><span class="pill-custom pill-pink">Weekly</span></div>
+<div class="mt-6"><div class="bar-row"><div class="bar-label"><span>Monday</span><span>18.7%</span></div><div class="bar-track"><div class="bar-fill bg-pink" style="width:100%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Tuesday</span><span>16.5%</span></div><div class="bar-track"><div class="bar-fill bg-pink" style="width:88.27%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Wednesday</span><span>15.3%</span></div><div class="bar-track"><div class="bar-fill bg-pink" style="width:81.88%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Thursday</span><span>8.8%</span></div><div class="bar-track"><div class="bar-fill bg-pink" style="width:47.24%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Friday</span><span>15.0%</span></div><div class="bar-track"><div class="bar-fill bg-pink" style="width:80.27%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Saturday</span><span>14.3%</span></div><div class="bar-track"><div class="bar-fill bg-pink" style="width:76.42%"></div></div></div><div class="bar-row"><div class="bar-label"><span>Sunday</span><span>11.3%</span></div><div class="bar-track"><div class="bar-fill bg-pink" style="width:60.34%"></div></div></div></div>
+</article>
+
+<article class="bento-card card-green md:col-span-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5"><div><span class="pill-custom pill-green">Model usage</span><h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mt-4">Top models by usage</h2><p class="text-sm text-[var(--text-muted)] mt-2">Ranked by tokens used by default. Click any metric header to re-rank.</p></div><div id="model-sort-status" class="font-mono text-[10px] text-[var(--text-muted)]">SORT: TOKENS ↓</div></div>
+<div class="table-wrap"><table id="model-table"><thead><tr><th>#</th><th>Model</th><th aria-sort="descending"><button class="sort-btn active" type="button" data-sort="tokens">Tokens <span class="sort-arrow">↓</span></button></th><th><button class="sort-btn" type="button" data-sort="token-share">Token share <span class="sort-arrow">↕</span></button></th><th><button class="sort-btn" type="button" data-sort="cost">Cost <span class="sort-arrow">↕</span></button></th><th><button class="sort-btn" type="button" data-sort="spend-share">Spend share <span class="sort-arrow">↕</span></button></th></tr></thead><tbody>
+<tr data-model="gpt-5.6-luna" data-tokens="2530.0" data-token-share="26.836952" data-cost="117.22" data-spend-share="2.5"><td class="rank">01</td><td class="model-name">gpt-5.6-luna</td><td>2.53B</td><td>26.8%</td><td class="text-neon-green">$117.22</td><td>2.5%</td></tr>
+<tr data-model="gpt-5.5" data-tokens="1070.0" data-token-share="11.350015" data-cost="1014.76" data-spend-share="21.3"><td class="rank">02</td><td class="model-name">gpt-5.5</td><td>1.07B</td><td>11.4%</td><td class="text-neon-green">$1,014.76</td><td>21.3%</td></tr>
+<tr data-model="glm-5.2" data-tokens="917.9" data-token-share="9.736616" data-cost="1214.83" data-spend-share="25.5"><td class="rank">03</td><td class="model-name">glm-5.2</td><td>917.9M</td><td>9.7%</td><td class="text-neon-green">$1,215</td><td>25.5%</td></tr>
+<tr data-model="gpt-5.6-sol" data-tokens="750.4" data-token-share="7.959861" data-cost="594.92" data-spend-share="12.5"><td class="rank">04</td><td class="model-name">gpt-5.6-sol</td><td>750.4M</td><td>8.0%</td><td class="text-neon-green">$594.92</td><td>12.5%</td></tr>
+<tr data-model="gemini-3-flash-preview" data-tokens="675.2" data-token-share="7.162178" data-cost="99.42" data-spend-share="2.1"><td class="rank">05</td><td class="model-name">gemini-3-flash-preview</td><td>675.2M</td><td>7.2%</td><td class="text-neon-green">$99.42</td><td>2.1%</td></tr>
+<tr data-model="gemini-3-pro-preview" data-tokens="539.4" data-token-share="5.721681" data-cost="446.47" data-spend-share="9.4"><td class="rank">06</td><td class="model-name">gemini-3-pro-preview</td><td>539.4M</td><td>5.7%</td><td class="text-neon-green">$446.47</td><td>9.4%</td></tr>
+<tr data-model="gpt-5.4" data-tokens="345.1" data-token-share="3.660645" data-cost="187.34" data-spend-share="3.9"><td class="rank">07</td><td class="model-name">gpt-5.4</td><td>345.1M</td><td>3.7%</td><td class="text-neon-green">$187.34</td><td>3.9%</td></tr>
+<tr data-model="gpt-5.6-terra" data-tokens="322.0" data-token-share="3.415612" data-cost="124.77" data-spend-share="2.6"><td class="rank">08</td><td class="model-name">gpt-5.6-terra</td><td>322.0M</td><td>3.4%</td><td class="text-neon-green">$124.77</td><td>2.6%</td></tr>
+<tr data-model="big-pickle" data-tokens="205.4" data-token-share="2.178779" data-cost="66.19" data-spend-share="1.4"><td class="rank">09</td><td class="model-name">big-pickle</td><td>205.4M</td><td>2.2%</td><td class="text-neon-green">$66.19</td><td>1.4%</td></tr>
+<tr data-model="claude-fable-5" data-tokens="164.7" data-token-share="1.747054" data-cost="283.12" data-spend-share="6.0"><td class="rank">10</td><td class="model-name">claude-fable-5</td><td>164.7M</td><td>1.7%</td><td class="text-neon-green">$283.12</td><td>6.0%</td></tr>
+<tr data-model="gpt-5.3-codex" data-tokens="135.5" data-token-share="1.437315" data-cost="63.50" data-spend-share="1.3"><td class="rank">11</td><td class="model-name">gpt-5.3-codex</td><td>135.5M</td><td>1.4%</td><td class="text-neon-green">$63.50</td><td>1.3%</td></tr>
+<tr data-model="kimi-k2.7-code" data-tokens="81.3" data-token-share="0.862389" data-cost="78.18" data-spend-share="1.6"><td class="rank">12</td><td class="model-name">kimi-k2.7-code</td><td>81.3M</td><td>0.9%</td><td class="text-neon-green">$78.18</td><td>1.6%</td></tr>
+</tbody></table></div>
+</article>
+</section>
+<footer class="mt-12 border-t border-border-gray pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase text-[var(--text-muted)] font-mono gap-2"><span>Dark Roast Cyber · Vibe Stats</span><span>Developer telemetry · 2026 YTD</span></footer>
+</main>
+<script>
+const contributionRows=[
+'.0000011113120001203322224002202222000000000000000000',
+'.1011122112010111203322221113312322000000000000000000',
+'.1111111221100111112442430142222222000000000000000000',
+'.1110111211001100123342321032323232000000000000000000',
+'00000211111002010124132221102232222000000000000000000',
+'1111011111100111112222223031413232100000000000000000.',
+'0000011112010101103234222000323222000000000000000000.'
+];
+const contrib=document.getElementById('contrib-grid');
+for(const row of contributionRows){for(const level of row){const cell=document.createElement('span');cell.className=level==='.'?'contrib-cell gh-empty':`contrib-cell gh-${level}`;contrib.appendChild(cell)}}
+const months=[['Jan',1],['Feb',5],['Mar',9],['Apr',14],['May',18],['Jun',23],['Jul',27],['Aug',31],['Sep',36],['Oct',40],['Nov',45],['Dec',49]];
+const monthGrid=document.getElementById('month-grid');for(const [name,col] of months){const el=document.createElement('span');el.textContent=name;el.style.gridColumn=col;monthGrid.appendChild(el)}
+const modelTable=document.getElementById('model-table');
+const modelBody=modelTable.querySelector('tbody');
+const sortButtons=[...modelTable.querySelectorAll('.sort-btn')];
+const sortStatus=document.getElementById('model-sort-status');
+let modelSort={key:'tokens',direction:'desc'};
+function sortModels(key,direction){
+  const rows=[...modelBody.querySelectorAll('tr')];
+  rows.sort((a,b)=>{
+    const av=parseFloat(a.dataset[key.replace('-', '')] ?? a.getAttribute(`data-${key}`));
+    const bv=parseFloat(b.dataset[key.replace('-', '')] ?? b.getAttribute(`data-${key}`));
+    return direction==='desc'?bv-av:av-bv;
+  });
+  rows.forEach((row,index)=>{row.querySelector('.rank').textContent=String(index+1).padStart(2,'0');modelBody.appendChild(row)});
+  sortButtons.forEach(btn=>{
+    const active=btn.dataset.sort===key;
+    btn.classList.toggle('active',active);
+    btn.querySelector('.sort-arrow').textContent=active?(direction==='desc'?'↓':'↑'):'↕';
+    const th=btn.closest('th');
+    if(active) th.setAttribute('aria-sort',direction==='desc'?'descending':'ascending'); else th.removeAttribute('aria-sort');
+  });
+  const labels={'tokens':'TOKENS','token-share':'TOKEN SHARE','cost':'COST','spend-share':'SPEND SHARE'};
+  sortStatus.textContent=`SORT: ${labels[key]} ${direction==='desc'?'↓':'↑'}`;
+  modelSort={key,direction};
+}
+sortButtons.forEach(btn=>btn.addEventListener('click',()=>{
+  const key=btn.dataset.sort;
+  const direction=modelSort.key===key&&modelSort.direction==='desc'?'asc':'desc';
+  sortModels(key,direction);
+}));
+sortModels('tokens','desc');
+const html=document.documentElement;
+const toggleBtn=document.getElementById('theme-toggle');
+const iconSun=document.getElementById('icon-sun');
+const iconMoon=document.getElementById('icon-moon');
+function updateIcons(){
+  if(html.classList.contains('light')){iconMoon.classList.add('hidden');iconSun.classList.remove('hidden')}
+  else{iconMoon.classList.remove('hidden');iconSun.classList.add('hidden')}
+}
+toggleBtn.addEventListener('click',()=>{html.classList.toggle('light');updateIcons();resizeCanvas()});
+updateIcons();
+const canvas=document.getElementById('particle-canvas');const ctx=canvas.getContext('2d');let particles=[];let mouse={x:null,y:null};
+function colors(){const s=getComputedStyle(document.body);return ['--color-pink','--color-blue','--color-yellow','--color-green','--color-purple'].map(v=>s.getPropertyValue(v).trim())}
+function resizeCanvas(){canvas.width=innerWidth;canvas.height=innerHeight;particles=[];const n=Math.min(180,Math.max(35,Math.floor(canvas.width*canvas.height/15000)));for(let i=0;i<n;i++)particles.push(new Particle())}
+class Particle{constructor(){const c=colors();this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2.2+1.2;this.sx=Math.random()*.4-.2;this.sy=Math.random()*.4-.2;this.color=c[Math.floor(Math.random()*c.length)]}update(){this.x+=this.sx;this.y+=this.sy;if(this.x>canvas.width||this.x<0)this.sx*=-1;if(this.y>canvas.height||this.y<0)this.sy*=-1;if(mouse.x!=null){const dx=mouse.x-this.x,dy=mouse.y-this.y,d=Math.sqrt(dx*dx+dy*dy)||1;if(d<140){const f=(140-d)/140;this.x+=dx/d*f*.25;this.y+=dy/d*f*.25}}}draw(){ctx.globalAlpha=.55;ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1}}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);for(let i=0;i<particles.length;i++){particles[i].update();particles[i].draw();for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){ctx.beginPath();ctx.strokeStyle=particles[i].color;ctx.globalAlpha=.12*(1-d/100);ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();ctx.globalAlpha=1}}}requestAnimationFrame(animate)}
+addEventListener('resize',resizeCanvas);addEventListener('mousemove',e=>{mouse.x=e.x;mouse.y=e.y});addEventListener('mouseleave',()=>{mouse.x=null;mouse.y=null});resizeCanvas();animate();
+</script>
+</body>
+</html>
